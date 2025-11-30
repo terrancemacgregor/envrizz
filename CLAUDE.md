@@ -4,7 +4,11 @@
 
 EnvRizz is a CLI tool that syncs .env files with AWS Secrets Manager, enabling teams to securely share environment variables without committing sensitive data to version control. As a developer, you use it to push your local .env files to AWS and pull them down on other machines or share them with teammates, eliminating the "can you send me the env file?" workflow.
 
-## Commands
+## Requirements
+
+- Node.js: 22.x
+- npm: 10.x
+- TypeScript: 5.x
 
 ### CLI Commands
 - `envrizz init` - Initialize project configuration
@@ -75,19 +79,6 @@ Husky runs lint on pre-commit, build and test on pre-push.
 
 ### File Naming Conventions
 - TypeScript source files: `kebab-case.ts` (e.g., `aws-secrets.ts`)
-- Configuration files: Standard names (e.g., `tsconfig.json`, `.envrizz.json`)
-- Documentation: `UPPERCASE.md` for root docs, `lowercase.md` for docs folder
 
 ### Code Style
 - Use TypeScript strict mode
-- Prefer async/await over raw promises
-- Export types alongside functions when useful for consumers
-- Keep CLI commands in `src/cli.ts`, library code in `src/lib/`
-
-## Key Dependencies
-
-- `@aws-sdk/client-secrets-manager` - AWS integration
-- `@aws-sdk/credential-provider-sso` - SSO authentication
-- `commander` - CLI framework
-- `dotenv` - .env file parsing
-- `glob` - File pattern matching
