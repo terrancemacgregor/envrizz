@@ -6,9 +6,9 @@ EnvRizz is a CLI tool that syncs .env files with AWS Secrets Manager, enabling t
 
 ## Requirements
 
-- Node.js: 22.x
-- npm: 10.x
-- TypeScript: 5.x
+- Node.js: 22.20.0
+- npm: 10.9.3
+- TypeScript: 5.9.3
 
 ### CLI Commands
 - `envrizz init` - Initialize project configuration
