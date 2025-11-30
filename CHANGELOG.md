@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/terrancemacgregor/envrizz/compare/v2.0.1...v2.0.2) (2025-11-30)
+
+
+### Bug Fixes
+
+* switch to OIDC trusted publishing, remove token auth ([e262fb5](https://github.com/terrancemacgregor/envrizz/commit/e262fb5eacd334fb9453e2d201b12cb620381688))
+
 ## [2.0.1](https://github.com/terrancemacgregor/envrizz/compare/v2.0.0...v2.0.1) (2025-11-30)
 
 
