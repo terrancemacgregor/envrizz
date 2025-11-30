@@ -1,25 +1,12 @@
 # EnvRizz Project Guide
 
 ## Overview
-EnvRizz is a CLI tool that syncs .env files with AWS Secrets Manager, allowing teams to securely share environment variables.
 
-## Project Structure
-```
-envrizz/
-├── src/
-│   ├── cli.ts          # CLI command definitions
-│   ├── index.ts        # Main export
-│   └── lib/
-│       ├── aws-secrets.ts  # AWS Secrets Manager operations
-│       ├── config.ts       # Configuration management
-│       └── env-parser.ts   # .env file parsing/serialization
-├── dist/               # Compiled JavaScript
-└── .envrizz.json      # Project configuration (if exists)
-```
+EnvRizz is a CLI tool that syncs .env files with AWS Secrets Manager, enabling teams to securely share environment variables without committing sensitive data to version control. As a developer, you use it to push your local .env files to AWS and pull them down on other machines or share them with teammates, eliminating the "can you send me the env file?" workflow.
 
-## Key Commands
+## Development Commands
 
-### Development
+### Build & Test
 - `npm run build` - Compile TypeScript to JavaScript
 - `npm run dev` - Watch mode for development
 - `npm test` - Run tests
@@ -32,76 +19,86 @@ envrizz/
 - `envrizz list` - Preview variables to sync
 - `envrizz install-hook` - Install git pre-push hook
 
-## Important Files
+## Deployment & Hosting
 
-### src/cli.ts
-Main CLI entry point with Commander.js command definitions.
+### NPM Publishing
+This package is published to NPM as `envrizz`. The release process is fully automated via semantic-release.
 
-### src/lib/aws-secrets.ts
-Handles AWS Secrets Manager operations (push/pull secrets).
+### Release Workflow
+1. Commits to `main` branch trigger GitHub Actions
+2. semantic-release analyzes commit messages to determine version bump
+3. If version changes, it publishes to NPM automatically
+4. GitHub release is created with auto-generated changelog
 
-### src/lib/env-parser.ts
-Parses .env files into key-value pairs and reconstructs files from stored data.
+### Publishing Credentials
+- **NPM_TOKEN**: Required for publishing to NPM registry. Stored as GitHub Actions secret.
+- **GITHUB_TOKEN**: Auto-provided by GitHub Actions for creating releases.
 
-### src/lib/config.ts
-Manages .envrizz.json configuration file.
+### Manual Publishing (if needed)
+```bash
+npm login
+npm publish
+```
 
-## AWS Integration
-- Uses AWS SDK v3 for Secrets Manager
-- Supports SSO profiles via `@aws-sdk/credential-provider-sso`
-- Stores all env variables as a single JSON secret per project
+## Third-Party API Keys & Tokens
 
-## Testing & Quality
-Before committing changes, always run:
-1. `npm run build` - Ensure TypeScript compiles
-2. `npm run lint` - Check for linting errors
-3. `npm test` - Run tests (if available)
+### AWS Credentials (Required for CLI Usage)
+The CLI requires AWS credentials with permissions to read/write AWS Secrets Manager.
 
-## Commit Convention (IMPORTANT)
-This project uses semantic-release for automated versioning and publishing. Follow these commit message formats:
+**Setup Options:**
+1. **AWS SSO (Recommended)**: `aws sso login --profile your-profile`
+2. **IAM Credentials**: `aws configure`
+3. **Environment Variables**: Set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
 
-### Commit Types
-- `feat:` New feature (triggers minor version bump: 1.0.0 → 1.1.0)
-- `fix:` Bug fix (triggers patch version bump: 1.0.0 → 1.0.1)
+**Required IAM Permissions:**
+- `secretsmanager:CreateSecret`
+- `secretsmanager:GetSecretValue`
+- `secretsmanager:PutSecretValue`
+- `secretsmanager:UpdateSecret`
+
+### NPM Token (For Publishing)
+Required only for maintainers publishing new versions.
+- Generate at: https://www.npmjs.com/settings/tokens
+- Store as `NPM_TOKEN` in GitHub repository secrets
+
+## Team Norms & Code Standards
+
+### Commit Convention
+This project uses semantic-release for automated versioning. Follow these commit message formats:
+
+**Commit Types:**
+- `feat:` New feature (minor version bump: 1.0.0 → 1.1.0)
+- `fix:` Bug fix (patch version bump: 1.0.0 → 1.0.1)
 - `docs:` Documentation changes (no version bump)
 - `chore:` Maintenance tasks (no version bump)
 - `refactor:` Code refactoring (no version bump)
 - `test:` Test changes (no version bump)
-- `perf:` Performance improvements (triggers patch version bump)
+- `perf:` Performance improvements (patch version bump)
 
-### Breaking Changes
+**Breaking Changes:**
 Add `BREAKING CHANGE:` in commit body for major version bump (1.0.0 → 2.0.0)
 
-### Examples
-```
-feat: add support for multiple AWS profiles
-fix: resolve env parsing issue with quotes
-docs: update README with new examples
-chore: update dependencies
-BREAKING CHANGE: remove support for Node 14
-```
+### Code Quality Checklist
+Before committing changes, always run:
+1. `npm run build` - Ensure TypeScript compiles
+2. `npm run lint` - Check for linting errors
+3. `npm test` - Run tests
 
-### Automated Release Process
-- Every commit to main triggers semantic-release
-- Version is auto-determined from commit messages
-- Automatically publishes to NPM if version changes
-- Creates GitHub release with changelog
-- Updates CHANGELOG.md file
+### File Naming Conventions
+- TypeScript source files: `kebab-case.ts` (e.g., `aws-secrets.ts`)
+- Configuration files: Standard names (e.g., `tsconfig.json`, `.envrizz.json`)
+- Documentation: `UPPERCASE.md` for root docs, `lowercase.md` for docs folder
+
+### Code Style
+- Use TypeScript strict mode
+- Prefer async/await over raw promises
+- Export types alongside functions when useful for consumers
+- Keep CLI commands in `src/cli.ts`, library code in `src/lib/`
 
 ## Key Dependencies
+
 - `@aws-sdk/client-secrets-manager` - AWS integration
+- `@aws-sdk/credential-provider-sso` - SSO authentication
 - `commander` - CLI framework
 - `dotenv` - .env file parsing
 - `glob` - File pattern matching
-
-## Configuration
-Projects can use `.envrizz.json` for configuration:
-```json
-{
-  "projectName": "my-project",
-  "awsRegion": "us-east-1",
-  "awsProfile": "profile-name",
-  "exclude": [".env.example"],
-  "include": [".env", ".env.*"]
-}
-```
