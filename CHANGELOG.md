@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/terrancemacgregor/envrizz/compare/v2.0.0...v2.0.1) (2025-11-30)
+
+
+### Bug Fixes
+
+* add .npmrc for CI token auth ([3c0af91](https://github.com/terrancemacgregor/envrizz/commit/3c0af910543034b9fd3002e9ce1df0bf3ada16b2))
+
 # [2.0.0](https://github.com/terrancemacgregor/envrizz/compare/v1.0.1...v2.0.0) (2025-11-30)
 
 
