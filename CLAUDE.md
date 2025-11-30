@@ -4,13 +4,7 @@
 
 EnvRizz is a CLI tool that syncs .env files with AWS Secrets Manager, enabling teams to securely share environment variables without committing sensitive data to version control. As a developer, you use it to push your local .env files to AWS and pull them down on other machines or share them with teammates, eliminating the "can you send me the env file?" workflow.
 
-## Development Commands
-
-### Build & Test
-- `npm run build` - Compile TypeScript to JavaScript
-- `npm run dev` - Watch mode for development
-- `npm test` - Run tests
-- `npm run lint` - Lint TypeScript files
+## Commands
 
 ### CLI Commands
 - `envrizz init` - Initialize project configuration
@@ -56,10 +50,8 @@ The CLI requires AWS credentials with permissions to read/write AWS Secrets Mana
 - `secretsmanager:PutSecretValue`
 - `secretsmanager:UpdateSecret`
 
-### NPM Token (For Publishing)
-Required only for maintainers publishing new versions.
-- Generate at: https://www.npmjs.com/settings/tokens
-- Store as `NPM_TOKEN` in GitHub repository secrets
+### NPM Token
+Uses an `NPM_TOKEN` stored in GitHub repository secrets to publish new versions.
 
 ## Team Norms & Code Standards
 
@@ -78,11 +70,8 @@ This project uses semantic-release for automated versioning. Follow these commit
 **Breaking Changes:**
 Add `BREAKING CHANGE:` in commit body for major version bump (1.0.0 → 2.0.0)
 
-### Code Quality Checklist
-Before committing changes, always run:
-1. `npm run build` - Ensure TypeScript compiles
-2. `npm run lint` - Check for linting errors
-3. `npm test` - Run tests
+### Code Quality
+Husky pre-commit hooks automatically run build, lint, and test before each commit.
 
 ### File Naming Conventions
 - TypeScript source files: `kebab-case.ts` (e.g., `aws-secrets.ts`)
