@@ -15,7 +15,7 @@ export class ConfigManager {
   private config: EnvSyncConfig;
 
   constructor(projectRoot: string = process.cwd()) {
-    this.configPath = path.join(projectRoot, '.env-sync.json');
+    this.configPath = path.join(projectRoot, '.envrizz.json');
     this.config = this.loadConfig();
   }
 

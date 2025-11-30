@@ -1,39 +1,39 @@
-# env-sync
+# EnvRizz 🔥
 
-Sync your .env files with AWS Secrets Manager. Never lose your environment variables again!
+Give your .env files that rizz! Sync them with AWS Secrets Manager and never lose your environment variables again. Your env files deserve better than being gitignored into oblivion.
 
 ## Installation
 
 ```bash
-npm install env-sync
+npm install envrizz
 ```
 
 ## Quick Start
 
 ### 1. Initialize your project
 ```bash
-npx env-sync init --project "my-project-name"
+npx envrizz init --project "my-project-name"
 ```
 
 ### 2. Push your .env files to AWS
 ```bash
-npx env-sync push
+npx envrizz push
 ```
 
 This will upload all your `.env` files to AWS Secrets Manager.
 
 ### 3. Pull .env files from AWS (on another machine or for a teammate)
 ```bash
-npx env-sync pull
+npx envrizz pull
 ```
 
 ## Commands
 
-### `env-sync push`
+### `envrizz push`
 Upload all .env files to AWS Secrets Manager
 
 ```bash
-npx env-sync push [options]
+npx envrizz push [options]
 
 Options:
   -p, --project <name>   Project name for the secret
@@ -41,11 +41,11 @@ Options:
   --profile <profile>    AWS SSO profile
 ```
 
-### `env-sync pull`
+### `envrizz pull`
 Download .env files from AWS Secrets Manager
 
 ```bash
-npx env-sync pull [options]
+npx envrizz pull [options]
 
 Options:
   -p, --project <name>   Project name for the secret
@@ -54,23 +54,23 @@ Options:
   --profile <profile>    AWS SSO profile
 ```
 
-### `env-sync list`
+### `envrizz list`
 Preview what variables would be synced
 
 ```bash
-npx env-sync list
+npx envrizz list
 ```
 
-### `env-sync install-hook`
+### `envrizz install-hook`
 Install git pre-push hook to auto-sync before pushing
 
 ```bash
-npx env-sync install-hook
+npx envrizz install-hook
 ```
 
 ## Configuration
 
-Create a `.env-sync.json` file in your project root:
+Create a `.envrizz.json` file in your project root:
 
 ```json
 {

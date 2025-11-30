@@ -10,8 +10,8 @@ import { ConfigManager } from './lib/config';
 const program = new Command();
 
 program
-  .name('env-sync')
-  .description('Sync .env files with AWS Secrets Manager')
+  .name('envrizz')
+  .description('Give your .env files that rizz! Sync them with AWS Secrets Manager')
   .version('1.0.0');
 
 program
@@ -135,7 +135,7 @@ program
     }
 
     configManager.saveConfig(config);
-    console.log('Created .env-sync.json configuration file');
+    console.log('Created .envrizz.json configuration file');
     console.log(`Project name: ${config.projectName}`);
   });
 
@@ -151,11 +151,11 @@ program
     }
 
     const hookContent = `#!/bin/sh
-# env-sync pre-push hook
+# envrizz pre-push hook
 # Automatically sync .env files to AWS before push
 
 echo "Syncing .env files to AWS..."
-npx env-sync push
+npx envrizz push
 
 if [ $? -ne 0 ]; then
   echo "Failed to sync .env files. Push aborted."

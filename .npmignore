@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.claude/
+node_modules/
+src/
+*.log
+.DS_Store
+coverage/
+.vscode/
+.idea/
+tsconfig.json
+.git/
+.gitignore
