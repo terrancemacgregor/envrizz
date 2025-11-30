@@ -71,7 +71,7 @@ This project uses semantic-release for automated versioning. Follow these commit
 Add `BREAKING CHANGE:` in commit body for major version bump (1.0.0 → 2.0.0)
 
 ### Code Quality
-Husky pre-commit hooks automatically run build, lint, and test before each commit.
+Husky runs lint on pre-commit, build and test on pre-push.
 
 ### File Naming Conventions
 - TypeScript source files: `kebab-case.ts` (e.g., `aws-secrets.ts`)
