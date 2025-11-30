@@ -57,6 +57,37 @@ Before committing changes, always run:
 2. `npm run lint` - Check for linting errors
 3. `npm test` - Run tests (if available)
 
+## Commit Convention (IMPORTANT)
+This project uses semantic-release for automated versioning and publishing. Follow these commit message formats:
+
+### Commit Types
+- `feat:` New feature (triggers minor version bump: 1.0.0 → 1.1.0)
+- `fix:` Bug fix (triggers patch version bump: 1.0.0 → 1.0.1)
+- `docs:` Documentation changes (no version bump)
+- `chore:` Maintenance tasks (no version bump)
+- `refactor:` Code refactoring (no version bump)
+- `test:` Test changes (no version bump)
+- `perf:` Performance improvements (triggers patch version bump)
+
+### Breaking Changes
+Add `BREAKING CHANGE:` in commit body for major version bump (1.0.0 → 2.0.0)
+
+### Examples
+```
+feat: add support for multiple AWS profiles
+fix: resolve env parsing issue with quotes
+docs: update README with new examples
+chore: update dependencies
+BREAKING CHANGE: remove support for Node 14
+```
+
+### Automated Release Process
+- Every commit to main triggers semantic-release
+- Version is auto-determined from commit messages
+- Automatically publishes to NPM if version changes
+- Creates GitHub release with changelog
+- Updates CHANGELOG.md file
+
 ## Key Dependencies
 - `@aws-sdk/client-secrets-manager` - AWS integration
 - `commander` - CLI framework
