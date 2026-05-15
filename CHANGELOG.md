@@ -1,3 +1,19 @@
+# [3.0.0](https://github.com/terrancemacgregor/envrizz/compare/v2.0.4...v3.0.0) (2026-05-15)
+
+
+### Bug Fixes
+
+* move AWS SDK to peer dependencies ([af1a703](https://github.com/terrancemacgregor/envrizz/commit/af1a703876a61a904e605b33d159c43fdf5bb5be))
+
+
+### BREAKING CHANGES
+
+* @aws-sdk/client-secrets-manager and
+@aws-sdk/credential-provider-sso are now peer dependencies.
+Users must install them separately. This ensures envrizz always
+uses the host project's AWS SDK version, eliminating duplicate
+installs and inherited vulnerabilities from stale SDK versions.
+
 ## [2.0.4](https://github.com/terrancemacgregor/envrizz/compare/v2.0.3...v2.0.4) (2026-05-15)
 
 
