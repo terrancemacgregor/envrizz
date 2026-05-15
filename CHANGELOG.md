@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/terrancemacgregor/envrizz/compare/v2.0.3...v2.0.4) (2026-05-15)
+
+
+### Bug Fixes
+
+* add security policy, engines field, and npm provenance ([1b27d33](https://github.com/terrancemacgregor/envrizz/commit/1b27d33298c2d32137dc43a37b8b662bdc09ab7d))
+
 ## [2.0.3](https://github.com/terrancemacgregor/envrizz/compare/v2.0.2...v2.0.3) (2026-05-15)
 
 
