@@ -34,6 +34,9 @@
   },
   "homepage": "https://github.com/terrancemacgregor/envrizz#readme",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.0.0",
     "@aws-sdk/credential-provider-sso": "^3.0.0",
