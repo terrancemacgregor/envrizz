@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/terrancemacgregor/envrizz/compare/v2.0.2...v2.0.3) (2026-05-15)
+
+
+### Bug Fixes
+
+* update dependencies to resolve security vulnerabilities ([9a31f65](https://github.com/terrancemacgregor/envrizz/commit/9a31f659ada85829b9e05f712ce075e601f35000))
+
 ## [2.0.2](https://github.com/terrancemacgregor/envrizz/compare/v2.0.1...v2.0.2) (2025-11-30)
 
 
