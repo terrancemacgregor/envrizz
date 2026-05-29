@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/terrancemacgregor/envrizz/compare/v3.0.0...v3.0.1) (2026-05-29)
+
+
+### Bug Fixes
+
+* remove deprecated glob dependency and rename config file ([fc4a3b8](https://github.com/terrancemacgregor/envrizz/commit/fc4a3b86e0b9e7ad3b3a9e21d54cccc76c74ab6a))
+
 # [3.0.0](https://github.com/terrancemacgregor/envrizz/compare/v2.0.4...v3.0.0) (2026-05-15)
 
 
