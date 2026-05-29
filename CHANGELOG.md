@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/terrancemacgregor/envrizz/compare/v3.0.1...v3.0.2) (2026-05-29)
+
+
+### Bug Fixes
+
+* add npm security audit to release workflow ([a8e8dad](https://github.com/terrancemacgregor/envrizz/commit/a8e8dad0c0647c26795568b42238cb71ab8d1670))
+
 ## [3.0.1](https://github.com/terrancemacgregor/envrizz/compare/v3.0.0...v3.0.1) (2026-05-29)
 
 
