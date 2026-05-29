@@ -1,3 +1,10 @@
+## [3.0.3](https://github.com/terrancemacgregor/envrizz/compare/v3.0.2...v3.0.3) (2026-05-29)
+
+
+### Bug Fixes
+
+* add npm audit to pre-push hook instead of CI ([ce3f56c](https://github.com/terrancemacgregor/envrizz/commit/ce3f56c741a24c1bc78d9b23dcde4e9ce9c5eb5b))
+
 ## [3.0.2](https://github.com/terrancemacgregor/envrizz/compare/v3.0.1...v3.0.2) (2026-05-29)
 
 
