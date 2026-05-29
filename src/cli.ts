@@ -7,12 +7,16 @@ import { EnvParser } from './lib/env-parser';
 import { AWSSecretsManager } from './lib/aws-secrets';
 import { ConfigManager } from './lib/config';
 
+const pkg = JSON.parse(
+  fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf-8')
+);
+
 const program = new Command();
 
 program
   .name('envrizz')
   .description('Give your .env files that rizz! Sync them with AWS Secrets Manager')
-  .version('1.0.0');
+  .version(pkg.version);
 
 program
   .command('push')
