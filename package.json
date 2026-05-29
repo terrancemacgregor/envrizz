@@ -15,7 +15,9 @@
     "dev": "tsc --watch",
     "test": "jest --passWithNoTests",
     "lint": "eslint .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepack": "npm pkg delete scripts.build scripts.dev scripts.test scripts.lint scripts.prepare scripts.prepack scripts.postpack devDependencies overrides",
+    "postpack": "git checkout -- package.json"
   },
   "keywords": [
     "env",
