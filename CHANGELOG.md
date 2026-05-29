@@ -1,3 +1,10 @@
+## [3.0.4](https://github.com/terrancemacgregor/envrizz/compare/v3.0.3...v3.0.4) (2026-05-29)
+
+
+### Bug Fixes
+
+* read version from package.json instead of hardcoded string ([afc3255](https://github.com/terrancemacgregor/envrizz/commit/afc32551db40b3ce745b5231181c0a552ed9a286))
+
 ## [3.0.3](https://github.com/terrancemacgregor/envrizz/compare/v3.0.2...v3.0.3) (2026-05-29)
 
 
