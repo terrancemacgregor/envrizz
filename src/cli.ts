@@ -135,7 +135,7 @@ program
     }
 
     configManager.saveConfig(config);
-    console.log('Created .envrizz.json configuration file');
+    console.log('Created envrizz.json configuration file');
     console.log(`Project name: ${config.projectName}`);
   });
 

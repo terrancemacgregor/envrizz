@@ -15,8 +15,21 @@ export class ConfigManager {
   private config: EnvSyncConfig;
 
   constructor(projectRoot: string = process.cwd()) {
-    this.configPath = path.join(projectRoot, '.envrizz.json');
+    this.configPath = path.join(projectRoot, 'envrizz.json');
+    this.migrateOldConfig(projectRoot);
     this.config = this.loadConfig();
+  }
+
+  private migrateOldConfig(projectRoot: string): void {
+    const oldConfigPath = path.join(projectRoot, '.envrizz.json');
+    
+    if (fs.existsSync(oldConfigPath) && !fs.existsSync(this.configPath)) {
+      fs.renameSync(oldConfigPath, this.configPath);
+      console.log('📦 Migrated .envrizz.json → envrizz.json');
+    } else if (fs.existsSync(oldConfigPath) && fs.existsSync(this.configPath)) {
+      console.warn('⚠️  Found both .envrizz.json and envrizz.json - using envrizz.json');
+      console.warn('   You can safely delete .envrizz.json');
+    }
   }
 
   private loadConfig(): EnvSyncConfig {

@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { glob } from 'glob';
 import * as dotenv from 'dotenv';
 
 export interface EnvVariable {
@@ -21,20 +20,13 @@ export class EnvParser {
   }
 
   async findEnvFiles(): Promise<string[]> {
-    const patterns = ['.env', '.env.*'];
-    const files: string[] = [];
-
-    for (const pattern of patterns) {
-      const matches = await glob(pattern, {
-        cwd: this.projectRoot,
-        absolute: false,
-        dot: true,
-        ignore: ['node_modules/**', '.git/**']
-      });
-      files.push(...matches);
-    }
-
-    return files.filter(file => !file.endsWith('.example'));
+    const entries = await fs.promises.readdir(this.projectRoot);
+    const files = entries.filter(
+      (file) =>
+        (file === '.env' || file.startsWith('.env.')) &&
+        !file.endsWith('.example')
+    );
+    return files;
   }
 
   parseEnvFile(filePath: string): EnvData {
