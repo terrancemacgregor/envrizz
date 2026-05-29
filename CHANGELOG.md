@@ -1,3 +1,10 @@
+## [3.0.5](https://github.com/terrancemacgregor/envrizz/compare/v3.0.4...v3.0.5) (2026-05-29)
+
+
+### Bug Fixes
+
+* strip dev-only fields from published package.json ([4350d90](https://github.com/terrancemacgregor/envrizz/commit/4350d90095282a66c7f78992c7e0cbca78ee57a8))
+
 ## [3.0.4](https://github.com/terrancemacgregor/envrizz/compare/v3.0.3...v3.0.4) (2026-05-29)
 
 
