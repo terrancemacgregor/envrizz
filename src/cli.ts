@@ -147,6 +147,33 @@ program
     configManager.saveConfig(merged);
     console.log('Created envrizz.json configuration file');
     console.log(`Project name: ${merged.projectName}`);
+
+    // Add push/pull scripts to the project's package.json
+    const pkgPath = path.join(process.cwd(), 'package.json');
+    if (fs.existsSync(pkgPath)) {
+      try {
+        const pkgJson = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+        const scripts = pkgJson.scripts || {};
+        let added = false;
+
+        if (!scripts['env:push']) {
+          scripts['env:push'] = 'envrizz push';
+          added = true;
+        }
+        if (!scripts['env:pull']) {
+          scripts['env:pull'] = 'envrizz pull';
+          added = true;
+        }
+
+        if (added) {
+          pkgJson.scripts = scripts;
+          fs.writeFileSync(pkgPath, JSON.stringify(pkgJson, null, 2) + '\n');
+          console.log('Added npm scripts: npm run env:push / npm run env:pull');
+        }
+      } catch {
+        // Non-critical — skip silently if package.json can't be updated
+      }
+    }
   });
 
 program
