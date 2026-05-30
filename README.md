@@ -41,6 +41,18 @@ Every team has the same workflow: *"Hey, can you Slack me the .env file?"* That'
 npm install envrizz
 ```
 
+## AI-Assisted Setup
+
+If you use an AI coding agent (Claude Code, Cursor, Windsurf, GitHub Copilot), point it at [`AGENT.md`](AGENT.md) and say "set up envrizz." The agent will:
+
+- Scan your existing `.env` files
+- Search your codebase to auto-document each variable
+- Pre-populate `envrizz.json` with intelligent comment descriptions
+- Configure AWS settings
+- Run your first push
+
+No manual config editing needed.
+
 ## Quick Start
 
 ### 1. Initialize your project
