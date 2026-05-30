@@ -37,7 +37,7 @@ program
       console.log(`Using AWS profile: ${profile}`);
       console.log(`Region: ${region}`);
 
-      const parser = new EnvParser();
+      const parser = new EnvParser(process.cwd(), config.exclude);
       const variables = await parser.getAllEnvVariables();
 
       if (variables.length === 0) {
@@ -62,6 +62,8 @@ program
 
       await awsManager.uploadSecret(projectName, formatted);
       console.log('✅ Successfully synced to AWS Secrets Manager');
+      const secretUrl = `https://${region}.console.aws.amazon.com/secretsmanager/secret?name=${encodeURIComponent(projectName)}&region=${region}`;
+      console.log(`🔗 View in AWS: ${secretUrl}`);
 
     } catch (error) {
       console.error('Error:', error);
@@ -133,14 +135,18 @@ program
   .action((options) => {
     const configManager = new ConfigManager();
     const config = configManager.getConfig();
+    const defaults = configManager.getDefaultConfig();
+
+    // Merge defaults so exclude/include are always present
+    const merged = { ...defaults, ...config };
 
     if (options.project) {
-      config.projectName = options.project;
+      merged.projectName = options.project;
     }
 
-    configManager.saveConfig(config);
+    configManager.saveConfig(merged);
     console.log('Created envrizz.json configuration file');
-    console.log(`Project name: ${config.projectName}`);
+    console.log(`Project name: ${merged.projectName}`);
   });
 
 program
@@ -181,7 +187,9 @@ program
   .description('List all environment variables that would be synced')
   .action(async () => {
     try {
-      const parser = new EnvParser();
+      const configManager = new ConfigManager();
+      const config = configManager.getConfig();
+      const parser = new EnvParser(process.cwd(), config.exclude);
       const variables = await parser.getAllEnvVariables();
 
       if (variables.length === 0) {

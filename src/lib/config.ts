@@ -45,7 +45,7 @@ export class ConfigManager {
     return this.getDefaultConfig();
   }
 
-  private getDefaultConfig(): EnvSyncConfig {
+  getDefaultConfig(): EnvSyncConfig {
     const packageJsonPath = path.join(process.cwd(), 'package.json');
     let projectName = path.basename(process.cwd());
 

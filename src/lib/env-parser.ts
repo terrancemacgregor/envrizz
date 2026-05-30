@@ -14,9 +14,11 @@ export interface EnvData {
 
 export class EnvParser {
   private projectRoot: string;
+  private exclude: string[];
 
-  constructor(projectRoot: string = process.cwd()) {
+  constructor(projectRoot: string = process.cwd(), exclude: string[] = ['.env.example', '.env.sample']) {
     this.projectRoot = projectRoot;
+    this.exclude = exclude;
   }
 
   async findEnvFiles(): Promise<string[]> {
@@ -24,7 +26,7 @@ export class EnvParser {
     const files = entries.filter(
       (file) =>
         (file === '.env' || file.startsWith('.env.')) &&
-        !file.endsWith('.example')
+        !this.exclude.includes(file)
     );
     return files;
   }
