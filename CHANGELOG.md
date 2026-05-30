@@ -1,3 +1,10 @@
+## [3.0.7](https://github.com/terrancemacgregor/envrizz/compare/v3.0.6...v3.0.7) (2026-05-30)
+
+
+### Bug Fixes
+
+* init adds env:push and env:pull scripts to package.json ([8d96372](https://github.com/terrancemacgregor/envrizz/commit/8d9637238edc7a35a32a9061ec3cf943ce152a4b))
+
 ## [3.0.6](https://github.com/terrancemacgregor/envrizz/compare/v3.0.5...v3.0.6) (2026-05-30)
 
 
