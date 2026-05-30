@@ -174,6 +174,29 @@ program
         // Non-critical — skip silently if package.json can't be updated
       }
     }
+
+    // Install git pre-commit hook to regenerate .env.example
+    const gitHooksDir = path.join(process.cwd(), '.git', 'hooks');
+    if (fs.existsSync(gitHooksDir)) {
+      const preCommitPath = path.join(gitHooksDir, 'pre-commit');
+      const envRizzHook = 'npx envrizz generate-example && git add .env.example';
+      let hookContent = '';
+
+      if (fs.existsSync(preCommitPath)) {
+        const existing = fs.readFileSync(preCommitPath, 'utf-8');
+        if (!existing.includes('envrizz generate-example')) {
+          hookContent = existing.trimEnd() + '\n\n# envrizz: keep .env.example in sync\n' + envRizzHook + '\n';
+        }
+      } else {
+        hookContent = '#!/bin/sh\n\n# envrizz: keep .env.example in sync\n' + envRizzHook + '\n';
+      }
+
+      if (hookContent) {
+        fs.writeFileSync(preCommitPath, hookContent);
+        fs.chmodSync(preCommitPath, '755');
+        console.log('\u2714 Installed pre-commit hook to auto-generate .env.example');
+      }
+    }
   });
 
 program
