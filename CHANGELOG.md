@@ -1,3 +1,10 @@
+## [3.5.1](https://github.com/terrancemacgregor/envrizz/compare/v3.5.0...v3.5.1) (2026-05-30)
+
+
+### Bug Fixes
+
+* rename AGENT.md to envrizz-agent.md ([1701d82](https://github.com/terrancemacgregor/envrizz/commit/1701d82488ca6996b63bd0ca706d11eae7a66635))
+
 # [3.5.0](https://github.com/terrancemacgregor/envrizz/compare/v3.4.1...v3.5.0) (2026-05-30)
 
 
