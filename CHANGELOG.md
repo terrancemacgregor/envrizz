@@ -1,3 +1,10 @@
+## [3.3.3](https://github.com/terrancemacgregor/envrizz/compare/v3.3.2...v3.3.3) (2026-05-30)
+
+
+### Bug Fixes
+
+* list source files in .env.example header, remove redundant filename ([c2c66a7](https://github.com/terrancemacgregor/envrizz/commit/c2c66a7ae98af1bbf589c72007fad9015cbd4979))
+
 ## [3.3.2](https://github.com/terrancemacgregor/envrizz/compare/v3.3.1...v3.3.2) (2026-05-30)
 
 
