@@ -1,3 +1,10 @@
+## [3.4.1](https://github.com/terrancemacgregor/envrizz/compare/v3.4.0...v3.4.1) (2026-05-30)
+
+
+### Bug Fixes
+
+* use absolute GitHub URLs for README images ([cf7d3e6](https://github.com/terrancemacgregor/envrizz/commit/cf7d3e68962fdbc1282cf4d02ed059221a0f0f51))
+
 # [3.4.0](https://github.com/terrancemacgregor/envrizz/compare/v3.3.3...v3.4.0) (2026-05-30)
 
 
