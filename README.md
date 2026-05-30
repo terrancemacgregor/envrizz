@@ -43,7 +43,7 @@ npm install envrizz
 
 ## AI-Assisted Setup
 
-If you use an AI coding agent (Claude Code, Cursor, Windsurf, GitHub Copilot), point it at [`AGENT.md`](AGENT.md) and say "set up envrizz." The agent will:
+If you use an AI coding agent (Claude Code, Cursor, Windsurf, GitHub Copilot), point it at [`envrizz-agent.md`](envrizz-agent.md) and say "set up envrizz." The agent will:
 
 - Scan your existing `.env` files
 - Search your codebase to auto-document each variable
