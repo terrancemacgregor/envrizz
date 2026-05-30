@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/terrancemacgregor/envrizz/compare/v3.4.1...v3.5.0) (2026-05-30)
+
+
+### Features
+
+* add AI setup agent for automated project configuration ([c687f64](https://github.com/terrancemacgregor/envrizz/commit/c687f642ced738123787c9269e516fa4be44df95))
+
 ## [3.4.1](https://github.com/terrancemacgregor/envrizz/compare/v3.4.0...v3.4.1) (2026-05-30)
 
 
