@@ -11,11 +11,11 @@ Give your .env files that rizz! Sync them with AWS Secrets Manager and never los
 Every team has the same workflow: *"Hey, can you Slack me the .env file?"* That's insecure, doesn't scale, and breaks every time someone adds a new variable and forgets to tell the team. EnvRizz replaces that with a single command — push your .env files to AWS Secrets Manager, and your teammates pull them down. No secrets in Slack DMs, no stale .env files, no onboarding friction.
 
 <p align="center">
-  <img src="docs/branding/terminal-demo.gif" alt="EnvRizz terminal demo" width="680">
+  <img src="https://raw.githubusercontent.com/terrancemacgregor/envrizz/main/docs/branding/terminal-demo.gif" alt="EnvRizz terminal demo" width="680">
 </p>
 
 <p align="center">
-  <img src="docs/branding/midwit-envrizz.jpg" alt="EnvRizz midwit meme" width="500">
+  <img src="https://raw.githubusercontent.com/terrancemacgregor/envrizz/main/docs/branding/midwit-envrizz.jpg" alt="EnvRizz midwit meme" width="500">
 </p>
 
 ## Why EnvRizz?
