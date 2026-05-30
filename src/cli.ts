@@ -326,4 +326,85 @@ program
     }
   });
 
+program
+  .command('diff')
+  .description('Compare keys across all .env files and show what\'s missing')
+  .action(async () => {
+    try {
+      const configManager = new ConfigManager();
+      const config = configManager.getConfig();
+      const parser = new EnvParser(process.cwd(), config.exclude);
+      const envFiles = await parser.findEnvFiles();
+
+      if (envFiles.length === 0) {
+        console.log('No .env files found');
+        return;
+      }
+
+      if (envFiles.length === 1) {
+        const parsed = parser.parseEnvFile(envFiles[0]);
+        console.log(`Only one .env file found (${envFiles[0]}) with ${Object.keys(parsed).length} keys. Nothing to compare.`);
+        return;
+      }
+
+      // Collect keys per file
+      const fileKeys: Record<string, Set<string>> = {};
+      for (const file of envFiles) {
+        const parsed = parser.parseEnvFile(file);
+        fileKeys[file] = new Set(Object.keys(parsed));
+      }
+
+      // All unique keys across every file
+      const allKeys = new Set<string>();
+      for (const keys of Object.values(fileKeys)) {
+        for (const key of keys) allKeys.add(key);
+      }
+
+      // Common keys (in every file)
+      const commonKeys = [...allKeys].filter(key =>
+        Object.values(fileKeys).every(s => s.has(key))
+      );
+
+      // Print common keys
+      console.log(`\nCommon to all files (${commonKeys.length}):`);
+      if (commonKeys.length > 0) {
+        console.log(`  ${commonKeys.join(', ')}`);
+      } else {
+        console.log('  (none)');
+      }
+
+      // Print what's missing from each file
+      let allSynced = true;
+      for (const file of envFiles) {
+        const missing = [...allKeys].filter(key => !fileKeys[file].has(key));
+        if (missing.length > 0) {
+          allSynced = false;
+          console.log(`\nMissing from ${file} (${missing.length}):`);
+          missing.forEach(key => console.log(`  ${key}`));
+        }
+      }
+
+      // Print keys unique to each file
+      for (const file of envFiles) {
+        const onlyHere = [...fileKeys[file]].filter(key =>
+          Object.entries(fileKeys).every(([f, s]) => f === file || !s.has(key))
+        );
+        if (onlyHere.length > 0) {
+          console.log(`\nOnly in ${file} (${onlyHere.length}):`);
+          onlyHere.forEach(key => console.log(`  ${key}`));
+        }
+      }
+
+      if (allSynced) {
+        console.log('\n\u2714 All .env files have the same keys');
+      }
+
+      console.log('');
+
+    } catch (error) {
+      console.error('Error:', error);
+      process.exit(1);
+    }
+  });
+
 program.parse(process.argv);
