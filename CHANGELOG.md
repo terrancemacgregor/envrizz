@@ -1,3 +1,10 @@
+## [3.0.6](https://github.com/terrancemacgregor/envrizz/compare/v3.0.5...v3.0.6) (2026-05-30)
+
+
+### Bug Fixes
+
+* init writes full config, exclude filter works, AWS link after push ([adb0432](https://github.com/terrancemacgregor/envrizz/commit/adb0432960f9be61358ae7f529d17fc762be25ec)), closes [#1](https://github.com/terrancemacgregor/envrizz/issues/1) [#4](https://github.com/terrancemacgregor/envrizz/issues/4) [#3](https://github.com/terrancemacgregor/envrizz/issues/3)
+
 ## [3.0.5](https://github.com/terrancemacgregor/envrizz/compare/v3.0.4...v3.0.5) (2026-05-29)
 
 
