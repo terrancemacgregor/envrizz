@@ -25,9 +25,9 @@ export class ConfigManager {
     
     if (fs.existsSync(oldConfigPath) && !fs.existsSync(this.configPath)) {
       fs.renameSync(oldConfigPath, this.configPath);
-      console.log('📦 Migrated .envrizz.json → envrizz.json');
+      console.log('\u2714 Migrated .envrizz.json \u2192 envrizz.json');
     } else if (fs.existsSync(oldConfigPath) && fs.existsSync(this.configPath)) {
-      console.warn('⚠️  Found both .envrizz.json and envrizz.json - using envrizz.json');
+      console.warn('\u26A0 Found both .envrizz.json and envrizz.json - using envrizz.json');
       console.warn('   You can safely delete .envrizz.json');
     }
   }

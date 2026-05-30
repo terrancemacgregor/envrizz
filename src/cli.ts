@@ -61,9 +61,9 @@ program
       });
 
       await awsManager.uploadSecret(projectName, formatted);
-      console.log('✅ Successfully synced to AWS Secrets Manager');
+      console.log('\u2714 Successfully synced to AWS Secrets Manager');
       const secretUrl = `https://${region}.console.aws.amazon.com/secretsmanager/secret?name=${encodeURIComponent(projectName)}&region=${region}`;
-      console.log(`🔗 View in AWS: ${secretUrl}`);
+      console.log(`\u2192 View in AWS: ${secretUrl}`);
 
     } catch (error) {
       console.error('Error:', error);
@@ -120,7 +120,7 @@ program
         console.log(`  - ${fileName}: ${options.overwrite ? 'overwritten' : 'created'} (${Object.keys(envData).length} variables)`);
       }
 
-      console.log('✅ Successfully pulled from AWS Secrets Manager');
+      console.log('\u2714 Successfully pulled from AWS Secrets Manager');
 
     } catch (error) {
       console.error('Error:', error);
@@ -205,7 +205,7 @@ echo "Environment sync complete."
     fs.writeFileSync(gitHookPath, hookContent);
     fs.chmodSync(gitHookPath, '755');
     
-    console.log('✅ Git pre-push hook installed');
+    console.log('\u2714 Git pre-push hook installed');
     console.log('Your .env files will now sync automatically before each push');
   });
 
