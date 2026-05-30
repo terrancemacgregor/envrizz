@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/terrancemacgregor/envrizz/compare/v3.3.3...v3.4.0) (2026-05-30)
+
+
+### Features
+
+* use envrizz.json comments as single source of truth for .env.example ([85cbeac](https://github.com/terrancemacgregor/envrizz/commit/85cbeac1132c8869de6438fe0a11e4bc8396bb72))
+
 ## [3.3.3](https://github.com/terrancemacgregor/envrizz/compare/v3.3.2...v3.3.3) (2026-05-30)
 
 
