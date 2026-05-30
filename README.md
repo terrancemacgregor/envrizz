@@ -14,6 +14,10 @@ Every team has the same workflow: *"Hey, can you Slack me the .env file?"* That'
   <img src="docs/branding/terminal-demo.gif" alt="EnvRizz terminal demo" width="680">
 </p>
 
+<p align="center">
+  <img src="docs/branding/midwit-envrizz.jpg" alt="EnvRizz midwit meme" width="500">
+</p>
+
 ## Why EnvRizz?
 
 | | EnvRizz | dotenv-vault | Chamber |
