@@ -1,3 +1,10 @@
+## [3.0.8](https://github.com/terrancemacgregor/envrizz/compare/v3.0.7...v3.0.8) (2026-05-30)
+
+
+### Bug Fixes
+
+* replace emojis with Unicode symbols in CLI output ([2480c8d](https://github.com/terrancemacgregor/envrizz/commit/2480c8dbcd46a0554467d52361eb408c547a95b1))
+
 ## [3.0.7](https://github.com/terrancemacgregor/envrizz/compare/v3.0.6...v3.0.7) (2026-05-30)
 
 
