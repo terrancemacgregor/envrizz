@@ -10,6 +10,21 @@ Give your .env files that rizz! Sync them with AWS Secrets Manager and never los
 
 Every team has the same workflow: *"Hey, can you Slack me the .env file?"* That's insecure, doesn't scale, and breaks every time someone adds a new variable and forgets to tell the team. EnvRizz replaces that with a single command — push your .env files to AWS Secrets Manager, and your teammates pull them down. No secrets in Slack DMs, no stale .env files, no onboarding friction.
 
+## Why EnvRizz?
+
+| | EnvRizz | dotenv-vault | Chamber |
+|---|---|---|---|
+| **Storage** | AWS Secrets Manager (your account) | Dotenv's hosted servers | AWS SSM Parameter Store |
+| **Third-party account** | No | Yes | No |
+| **Your data stays in your AWS** | Yes | No | Yes |
+| **Preserves .env file structure** | Yes — push/pull entire files | No — key/value only | No — key/value only |
+| **Setup** | `npx envrizz init` | Sign up + `npx dotenv-vault push` | Install Go binary + KMS key |
+| **Language** | Node.js / npm | Node.js / npm | Go |
+| **Multiple .env files** | Yes (`.env`, `.env.local`, etc.) | Yes (per environment) | No |
+| **Git hook support** | Built-in (`install-hook`) | No | No |
+
+**TL;DR** — If your team already uses AWS, EnvRizz is the simplest path. No third-party accounts, no extra infrastructure. Your secrets stay in your AWS account, encrypted by KMS, accessible through the same IAM permissions you already manage.
+
 ## Installation
 
 ```bash
