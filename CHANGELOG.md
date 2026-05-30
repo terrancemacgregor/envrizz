@@ -1,3 +1,10 @@
+## [3.3.1](https://github.com/terrancemacgregor/envrizz/compare/v3.3.0...v3.3.1) (2026-05-30)
+
+
+### Bug Fixes
+
+* generate-example carries over comments from source .env files ([e8d907a](https://github.com/terrancemacgregor/envrizz/commit/e8d907a1cfb0ead71ee832efae27ee9f75b9d625))
+
 # [3.3.0](https://github.com/terrancemacgregor/envrizz/compare/v3.2.0...v3.3.0) (2026-05-30)
 
 
