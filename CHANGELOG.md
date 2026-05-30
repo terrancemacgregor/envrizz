@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/terrancemacgregor/envrizz/compare/v3.2.0...v3.3.0) (2026-05-30)
+
+
+### Features
+
+* add diff command to compare keys across .env files ([d04e9f5](https://github.com/terrancemacgregor/envrizz/commit/d04e9f557d337c2563794c9100de703fff4b4f72))
+
 # [3.2.0](https://github.com/terrancemacgregor/envrizz/compare/v3.1.0...v3.2.0) (2026-05-30)
 
 
