@@ -6,6 +6,10 @@
 
 Give your .env files that rizz! Sync them with AWS Secrets Manager and never lose your environment variables again. Your env files deserve better than being gitignored into oblivion.
 
+## The Problem
+
+Every team has the same workflow: *"Hey, can you Slack me the .env file?"* That's insecure, doesn't scale, and breaks every time someone adds a new variable and forgets to tell the team. EnvRizz replaces that with a single command — push your .env files to AWS Secrets Manager, and your teammates pull them down. No secrets in Slack DMs, no stale .env files, no onboarding friction.
+
 ## Installation
 
 ```bash
