@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/terrancemacgregor/envrizz/compare/v3.0.8...v3.1.0) (2026-05-30)
+
+
+### Features
+
+* add generate-example command to create .env.example ([1289949](https://github.com/terrancemacgregor/envrizz/commit/12899498896f4571c2953c9b15dc89740c61c65b))
+
 ## [3.0.8](https://github.com/terrancemacgregor/envrizz/compare/v3.0.7...v3.0.8) (2026-05-30)
 
 
