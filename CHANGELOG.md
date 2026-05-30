@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/terrancemacgregor/envrizz/compare/v3.1.0...v3.2.0) (2026-05-30)
+
+
+### Features
+
+* init installs pre-commit hook to auto-generate .env.example ([445c408](https://github.com/terrancemacgregor/envrizz/commit/445c408f914dca328f271c6c38d17737f694b826))
+
 # [3.1.0](https://github.com/terrancemacgregor/envrizz/compare/v3.0.8...v3.1.0) (2026-05-30)
 
 
