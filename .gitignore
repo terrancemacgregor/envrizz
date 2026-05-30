@@ -9,3 +9,5 @@ dist/
 coverage/
 .vscode/
 .idea/
+docs/test-reports/
+*.code-workspace

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="520" viewBox="0 0 680 520">
+  <style>
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    @keyframes appear {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .line { opacity: 0; animation: appear 0.01s forwards; }
+    .cursor {
+      animation: blink 0.8s step-end infinite;
+    }
+
+    /* Staggered line appearances — typing effect */
+    .l1  { animation-delay: 0.3s; }
+    .l2  { animation-delay: 0.8s; }
+    .l3  { animation-delay: 1.8s; }
+    .l4  { animation-delay: 2.2s; }
+
+    .l5  { animation-delay: 3.2s; }
+    .l6  { animation-delay: 3.7s; }
+    .l7  { animation-delay: 4.3s; }
+    .l8  { animation-delay: 4.6s; }
+    .l9  { animation-delay: 4.9s; }
+    .l10 { animation-delay: 5.2s; }
+    .l11 { animation-delay: 5.5s; }
+    .l12 { animation-delay: 5.8s; }
+
+    .l13 { animation-delay: 6.8s; }
+    .l14 { animation-delay: 7.3s; }
+    .l15 { animation-delay: 7.9s; }
+    .l16 { animation-delay: 8.2s; }
+    .l17 { animation-delay: 8.5s; }
+    .l18 { animation-delay: 8.8s; }
+    .l19 { animation-delay: 9.4s; }
+
+    .l20 { animation-delay: 10.4s; }
+
+    /* Cursor follows the last visible command */
+    .c1 { opacity: 0; animation: blink 0.8s step-end 0.3s 2, appear 0.01s 0.3s forwards; animation-fill-mode: forwards; }
+    .c1 { animation: blink 0.8s step-end infinite; animation-delay: 0.3s; }
+  </style>
+
+  <!-- Terminal Window -->
+  <rect width="680" height="520" rx="10" fill="#1e1e2e"/>
+
+  <!-- Title Bar -->
+  <rect width="680" height="36" rx="10" fill="#313244"/>
+  <rect y="26" width="680" height="10" fill="#313244"/>
+  <circle cx="20" cy="18" r="6" fill="#f38ba8"/>
+  <circle cx="40" cy="18" r="6" fill="#f9e2af"/>
+  <circle cx="60" cy="18" r="6" fill="#a6e3a1"/>
+  <text x="340" y="22" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-size="12" fill="#a6adc8">Terminal</text>
+
+  <!-- Terminal Content -->
+  <g font-family="SF Mono, Menlo, Consolas, monospace" font-size="13">
+
+    <!-- Step 1: Init -->
+    <text x="20" y="62" class="line l1" fill="#6c7086"># Initialize your project</text>
+    <text x="20" y="82" class="line l2">
+      <tspan fill="#a6e3a1">$</tspan>
+      <tspan fill="#cdd6f4"> npx envrizz init --project my-app</tspan>
+    </text>
+    <text x="20" y="102" class="line l3" fill="#f9e2af">Created envrizz.json configuration file</text>
+    <text x="20" y="122" class="line l4" fill="#a6adc8">Project name: my-app</text>
+
+    <!-- Step 2: List -->
+    <text x="20" y="156" class="line l5" fill="#6c7086"># Preview what gets synced</text>
+    <text x="20" y="176" class="line l6">
+      <tspan fill="#a6e3a1">$</tspan>
+      <tspan fill="#cdd6f4"> npx envrizz list</tspan>
+    </text>
+    <text x="20" y="196" class="line l7" fill="#a6adc8">Environment variables to sync:</text>
+    <text x="20" y="218" class="line l8" fill="#89b4fa">.env:</text>
+    <text x="20" y="238" class="line l9" fill="#a6adc8">  PORT=3000</text>
+    <text x="20" y="258" class="line l10" fill="#a6adc8">  DATABASE_URL=postgres://localhost:5432/mydb</text>
+    <text x="20" y="278" class="line l11" fill="#89b4fa">.env.local:</text>
+    <text x="20" y="298" class="line l12" fill="#a6adc8">  API_KEY=sk_live_abc123...</text>
+
+    <!-- Step 3: Push -->
+    <text x="20" y="336" class="line l13" fill="#6c7086"># Push to AWS Secrets Manager</text>
+    <text x="20" y="356" class="line l14">
+      <tspan fill="#a6e3a1">$</tspan>
+      <tspan fill="#cdd6f4"> npx envrizz push</tspan>
+    </text>
+    <text x="20" y="376" class="line l15" fill="#a6adc8">Syncing project: my-app</text>
+    <text x="20" y="396" class="line l16" fill="#a6adc8">Found 3 environment variables across files:</text>
+    <text x="20" y="416" class="line l17" fill="#a6adc8">  - .env: 2 variables</text>
+    <text x="20" y="436" class="line l18" fill="#a6adc8">  - .env.local: 1 variable</text>
+    <text x="20" y="460" class="line l19" fill="#a6e3a1">&#x2705; Successfully synced to AWS Secrets Manager</text>
+
+    <!-- Step 4: Pull hint -->
+    <text x="20" y="500" class="line l20" fill="#6c7086"># Teammate runs: npx envrizz pull  &#x2190; gets the same .env files</text>
+  </g>
+</svg>
