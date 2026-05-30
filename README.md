@@ -1,5 +1,9 @@
 # EnvRizz 🔥
 
+[![npm version](https://img.shields.io/npm/v/envrizz.svg)](https://www.npmjs.com/package/envrizz)
+[![license](https://img.shields.io/npm/l/envrizz.svg)](https://github.com/terrancemacgregor/envrizz/blob/main/LICENSE)
+[![node](https://img.shields.io/node/v/envrizz.svg)](https://nodejs.org)
+
 Give your .env files that rizz! Sync them with AWS Secrets Manager and never lose your environment variables again. Your env files deserve better than being gitignored into oblivion.
 
 ## Installation
@@ -70,7 +74,7 @@ npx envrizz install-hook
 
 ## Configuration
 
-Create a `.envrizz.json` file in your project root:
+Create a `envrizz.json` file in your project root:
 
 ```json
 {
