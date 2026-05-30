@@ -287,33 +287,11 @@ program
         return;
       }
 
-      // Collect keys from each file, and extract comments from the first file
+      // Collect keys from each file
       const fileSets: Set<string>[] = [];
-      const keyComments: Record<string, string> = {};
-
-      for (let i = 0; i < envFiles.length; i++) {
-        const file = envFiles[i];
+      for (const file of envFiles) {
         const parsed = parser.parseEnvFile(file);
         fileSets.push(new Set(Object.keys(parsed)));
-
-        // Extract comments from raw file lines — first file with a comment for a key wins
-        const filePath = path.join(process.cwd(), file);
-        const rawLines = fs.readFileSync(filePath, 'utf-8').split('\n');
-        let pendingComment = '';
-        for (const line of rawLines) {
-          const trimmed = line.trim();
-          if (trimmed.startsWith('#')) {
-            pendingComment = trimmed;
-          } else if (trimmed.includes('=')) {
-            const key = trimmed.split('=', 1)[0].trim();
-            if (pendingComment && !keyComments[key]) {
-              keyComments[key] = pendingComment;
-            }
-            pendingComment = '';
-          } else {
-            pendingComment = '';
-          }
-        }
       }
 
       // Find keys that appear in ALL files
@@ -326,7 +304,28 @@ program
         return;
       }
 
-      // Generate .env.example with comments and empty values
+      // Get comments from config, add TODOs for any missing keys
+      const comments = config.comments || {};
+      let configUpdated = false;
+      const newKeys: string[] = [];
+
+      for (const key of commonKeys) {
+        if (!comments[key]) {
+          comments[key] = `TODO: add description for ${key}`;
+          configUpdated = true;
+          newKeys.push(key);
+        }
+      }
+
+      // Save updated comments back to config if new keys were found
+      if (configUpdated) {
+        config.comments = comments;
+        configManager.saveConfig(config);
+        console.log(`Added ${newKeys.length} new key(s) to envrizz.json comments:`);
+        newKeys.forEach(key => console.log(`  ${key} \u2192 update description in envrizz.json`));
+      }
+
+      // Generate .env.example
       const now = new Date();
       const timestamp = now.toLocaleString('en-US', {
         year: 'numeric', month: 'long', day: 'numeric',
@@ -341,7 +340,7 @@ program
       ];
 
       for (const key of commonKeys) {
-        lines.push(keyComments[key] || '#');
+        lines.push(`# ${comments[key]}`);
         lines.push(`${key}=`);
         lines.push('');
       }

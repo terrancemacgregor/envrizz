@@ -8,6 +8,7 @@ export interface EnvSyncConfig {
   awsAccountId?: string;
   exclude?: string[];
   include?: string[];
+  comments?: Record<string, string>;
 }
 
 export class ConfigManager {
@@ -64,7 +65,8 @@ export class ConfigManager {
       awsProfile: process.env.AWS_PROFILE,
       awsAccountId: process.env.AWS_ACCOUNT_ID,
       exclude: ['.env.example', '.env.sample'],
-      include: ['.env', '.env.*']
+      include: ['.env', '.env.*'],
+      comments: {}
     };
   }
 
