@@ -1,3 +1,10 @@
+## [3.3.2](https://github.com/terrancemacgregor/envrizz/compare/v3.3.1...v3.3.2) (2026-05-30)
+
+
+### Bug Fixes
+
+* add blank comment placeholders and timestamp to .env.example ([760a5ea](https://github.com/terrancemacgregor/envrizz/commit/760a5ea3151b53beb23a21b5262099dcf12e2775))
+
 ## [3.3.1](https://github.com/terrancemacgregor/envrizz/compare/v3.3.0...v3.3.1) (2026-05-30)
 
 
