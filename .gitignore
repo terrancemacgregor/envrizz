@@ -11,3 +11,5 @@ coverage/
 .idea/
 docs/test-reports/
 *.code-workspace
+CLAUDE.md
+.claude/

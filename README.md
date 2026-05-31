@@ -268,6 +268,62 @@ PORT=
 URL=
 ```
 
+## Development
+
+### Requirements
+
+- Node.js >= 18.0.0
+- npm
+- TypeScript
+
+### Test Suite
+
+78 tests across 4 suites:
+
+| Suite | Tests | Type |
+|-------|-------|------|
+| EnvParser | 25 | Unit |
+| ConfigManager | 13 | Unit |
+| AWSSecretsManager | 15 | Unit (mocked) |
+| CLI | 25 | Integration |
+
+```bash
+npm test          # Run all tests
+npm run build     # Compile TypeScript
+npm run lint      # Run ESLint
+```
+
+### Git Hooks (Husky)
+
+- **Pre-commit:** runs lint
+- **Pre-push:** runs build, tests (78 tests), and `npm audit`
+
+### Commit Convention
+
+This project uses [semantic-release](https://github.com/semantic-release/semantic-release) for automated versioning:
+
+| Prefix | Effect |
+|--------|--------|
+| `feat:` | Minor version bump (1.0.0 → 1.1.0) |
+| `fix:` | Patch version bump (1.0.0 → 1.0.1) |
+| `docs:` | No version bump |
+| `test:` | No version bump |
+| `chore:` | No version bump |
+| `BREAKING CHANGE:` in body | Major version bump (1.0.0 → 2.0.0) |
+
+### Release Workflow
+
+1. Commits to `main` trigger GitHub Actions
+2. semantic-release analyzes commit messages to determine version bump
+3. Published package.json is cleaned (no devDependencies, scripts, or overrides)
+4. Published to npm with provenance
+5. GitHub release created with auto-generated changelog
+
+### File Naming
+
+- TypeScript source: `kebab-case.ts`
+- Tests: `kebab-case.test.ts` (co-located with source)
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
