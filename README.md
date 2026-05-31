@@ -14,10 +14,6 @@ Every team has the same workflow: *"Hey, can you Slack me the .env file?"* That'
   <img src="https://raw.githubusercontent.com/terrancemacgregor/envrizz/main/docs/branding/terminal-demo.gif" alt="EnvRizz terminal demo" width="680">
 </p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/terrancemacgregor/envrizz/main/docs/branding/midwit-envrizz.jpg" alt="EnvRizz midwit meme" width="500">
-</p>
-
 ## Development vs. Production
 
 EnvRizz is a **development workflow tool**. It solves the local problem: getting your secrets organized, documented, compared across environments, and synced to AWS so your team can collaborate without Slacking `.env` files around.
@@ -279,3 +275,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## License
 
 MIT
+
+---
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/terrancemacgregor/envrizz/main/docs/branding/midwit-envrizz.jpg" alt="EnvRizz midwit meme" width="500">
+</p>
