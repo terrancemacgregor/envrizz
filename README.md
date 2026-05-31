@@ -13,6 +13,14 @@ Give your .env files that rizz! Sync them with AWS Secrets Manager and never los
 
 Every team has the same workflow: *"Hey, can you Slack me the .env file?"* That's insecure, doesn't scale, and breaks every time someone adds a new variable and forgets to tell the team. EnvRizz replaces that with a single command — push your .env files to AWS Secrets Manager, and your teammates pull them down. No secrets in Slack DMs, no stale .env files, no onboarding friction.
 
+### Works with any project that uses .env files
+
+EnvRizz isn't just for Node.js. If your project uses `.env` files, EnvRizz can manage them — regardless of language or framework:
+
+**Node.js / Next.js / React** | **Python / Django / Flask** | **Ruby / Rails** | **Go** | **PHP / Laravel** | **Rust** | **Docker Compose**
+
+The only requirement is Node.js to run the CLI. The `.env` files it manages can be for anything.
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/terrancemacgregor/envrizz/main/docs/branding/terminal-demo.gif" alt="EnvRizz terminal demo" width="680">
 </p>
