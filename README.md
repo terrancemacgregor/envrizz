@@ -254,6 +254,24 @@ PORT=
 URL=
 ```
 
+## Development vs. Production
+
+EnvRizz is a **development workflow tool**. It solves the local problem: getting your secrets organized, documented, compared across environments, and synced to AWS so your team can collaborate without Slacking `.env` files around.
+
+In production, you shouldn't have `.env` files at all. Once your secrets are in AWS Secrets Manager (which EnvRizz handles), your production infrastructure should pull them directly at runtime:
+
+| Environment | How secrets get there | How the app reads them |
+|-------------|----------------------|----------------------|
+| **Local dev** | `envrizz pull` writes `.env` files | Your app reads `.env` files normally |
+| **CI/CD** | Pipeline pulls from Secrets Manager via SDK | Injected as environment variables |
+| **ECS/Fargate** | Task definition references Secrets Manager ARNs | Injected automatically by AWS |
+| **Lambda** | Function config references Secrets Manager | SDK call or environment variable |
+| **Kubernetes** | ExternalSecrets operator syncs from Secrets Manager | Mounted as env vars in pods |
+
+The pattern is: **EnvRizz manages the secrets, your infrastructure consumes them.** No `.env` files ever touch a production server.
+
+Tools like [chamber](https://github.com/segmentio/chamber), [aws-vault](https://github.com/99designs/aws-vault), and the AWS SDK can handle the runtime injection side. EnvRizz doesn't try to replace them — it gets your secrets into the right place so those tools can do their job.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
