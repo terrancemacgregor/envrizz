@@ -1,3 +1,10 @@
+## [3.5.2](https://github.com/terrancemacgregor/envrizz/compare/v3.5.1...v3.5.2) (2026-05-31)
+
+
+### Bug Fixes
+
+* merge CLAUDE.md into README and gitignore it ([62573ee](https://github.com/terrancemacgregor/envrizz/commit/62573ee20710d2a5fe8798662529104e6c2e20c7))
+
 ## [3.5.1](https://github.com/terrancemacgregor/envrizz/compare/v3.5.0...v3.5.1) (2026-05-30)
 
 
