@@ -11,7 +11,25 @@ Give your .env files that rizz! Sync them with AWS Secrets Manager and never los
 
 ## The Problem
 
-Every team has the same workflow: *"Hey, can you Slack me the .env file?"* That's insecure, doesn't scale, and breaks every time someone adds a new variable and forgets to tell the team. EnvRizz replaces that with a single command — push your .env files to AWS Secrets Manager, and your teammates pull them down. No secrets in Slack DMs, no stale .env files, no onboarding friction.
+### 1. Your .env files are out of sync
+
+Someone added `STRIPE_WEBHOOK_SECRET` three weeks ago and forgot to tell the team. Half the developers have it, half don't. Your `.env.dev` has 12 variables, staging has 14, production has 11. There's no `.env.example` and if there is, it's six months stale. A missing variable in production takes down the app at 2am, and nobody knows which file is the source of truth.
+
+### 2. Your secrets are being shared insecurely
+
+Secrets get passed around through Slack DMs, email, or a Google Doc someone made "temporarily" two years ago. Once it's in a chat, you can't take it back. Every developer's laptop has the full `.env` file sitting on disk, unencrypted. When a contractor leaves, they still have every secret they ever pulled. There's no access control, no audit trail, and no way to revoke a file that's already been copied.
+
+### 3. Onboarding is painful
+
+New developer joins. They clone the repo, run `npm install`, and immediately hit errors because they don't have the `.env` file. They spend half a day chasing credentials from three different people who each have a slightly different version. By the time they can actually run the project, it's the end of the day.
+
+## How EnvRizz Solves This
+
+EnvRizz syncs your `.env` files with AWS Secrets Manager so your team has one source of truth. Push your environment variables to AWS with one command, and your teammates pull them down with another. No secrets in Slack DMs, no stale files, no onboarding friction.
+
+- **Environment drift?** Run `envrizz diff` to see exactly which keys are missing from which environments. Run `envrizz generate-example` to create a documented `.env.example` that stays up to date automatically.
+- **Insecure sharing?** Your secrets live in AWS Secrets Manager — encrypted by KMS, scoped by IAM permissions, out of chat history. Push once, everyone pulls.
+- **Onboarding?** New developer clones the repo and runs `envrizz pull`. Done. Every variable, every file, ready to go.
 
 ### Works with any project that uses .env files
 
