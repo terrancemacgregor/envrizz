@@ -1,3 +1,10 @@
+## [3.6.5](https://github.com/terrancemacgregor/envrizz/compare/v3.6.4...v3.6.5) (2026-06-01)
+
+
+### Bug Fixes
+
+* add OWASP Dependency Check workflow ([43c433b](https://github.com/terrancemacgregor/envrizz/commit/43c433b7207749612c66a6e0f9c7ce2ba2249ba5))
+
 ## [3.6.4](https://github.com/terrancemacgregor/envrizz/compare/v3.6.3...v3.6.4) (2026-06-01)
 
 
