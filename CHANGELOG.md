@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/terrancemacgregor/envrizz/compare/v3.5.2...v3.6.0) (2026-06-01)
+
+
+### Features
+
+* add doctor command for environment health checks ([8211e50](https://github.com/terrancemacgregor/envrizz/commit/8211e508a745b0e964e471f274221eba1e041350))
+
 ## [3.5.2](https://github.com/terrancemacgregor/envrizz/compare/v3.5.1...v3.5.2) (2026-05-31)
 
 
