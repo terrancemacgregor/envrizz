@@ -1,3 +1,10 @@
+## [3.6.1](https://github.com/terrancemacgregor/envrizz/compare/v3.6.0...v3.6.1) (2026-06-01)
+
+
+### Bug Fixes
+
+* prevent path traversal in pull command and parseEnvFile ([b2175cb](https://github.com/terrancemacgregor/envrizz/commit/b2175cbc661cffd456ab37266254f252e02472b4))
+
 # [3.6.0](https://github.com/terrancemacgregor/envrizz/compare/v3.5.2...v3.6.0) (2026-06-01)
 
 
