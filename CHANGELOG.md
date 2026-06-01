@@ -1,3 +1,10 @@
+## [3.6.8](https://github.com/terrancemacgregor/envrizz/compare/v3.6.7...v3.6.8) (2026-06-01)
+
+
+### Bug Fixes
+
+* add fuzz testing, fix quote-stripping edge case ([1b94a31](https://github.com/terrancemacgregor/envrizz/commit/1b94a3103c4b7504120a31711040c1ac24c66e32))
+
 ## [3.6.7](https://github.com/terrancemacgregor/envrizz/compare/v3.6.6...v3.6.7) (2026-06-01)
 
 
