@@ -32,8 +32,13 @@ export class EnvParser {
   }
 
   parseEnvFile(filePath: string): EnvData {
-    const absolutePath = path.join(this.projectRoot, filePath);
-    
+    const absolutePath = path.resolve(this.projectRoot, filePath);
+
+    // Prevent path traversal
+    if (!absolutePath.startsWith(this.projectRoot + path.sep) && absolutePath !== this.projectRoot) {
+      throw new Error(`Path traversal detected: ${filePath}`);
+    }
+
     if (!fs.existsSync(absolutePath)) {
       throw new Error(`File not found: ${absolutePath}`);
     }

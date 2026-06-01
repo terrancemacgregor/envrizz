@@ -105,8 +105,14 @@ program
       console.log(`Found ${fileMap.size} .env file(s) in AWS:`);
       
       for (const [fileName, envData] of fileMap.entries()) {
-        const filePath = path.join(process.cwd(), fileName);
-        
+        const filePath = path.resolve(process.cwd(), fileName);
+
+        // Prevent path traversal — refuse to write outside the project directory
+        if (!filePath.startsWith(process.cwd() + path.sep) && filePath !== process.cwd()) {
+          console.error(`  - ${fileName}: SKIPPED (path traversal detected)`);
+          continue;
+        }
+
         if (fs.existsSync(filePath) && !options.overwrite) {
           console.log(`  - ${fileName}: exists (skipping, use --overwrite to replace)`);
           continue;
