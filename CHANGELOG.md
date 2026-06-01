@@ -1,3 +1,10 @@
+## [3.6.6](https://github.com/terrancemacgregor/envrizz/compare/v3.6.5...v3.6.6) (2026-06-01)
+
+
+### Bug Fixes
+
+* remove invalid OWASP CLI flags ([a834ac6](https://github.com/terrancemacgregor/envrizz/commit/a834ac650c453764fe599777495dd58bc2268e40))
+
 ## [3.6.5](https://github.com/terrancemacgregor/envrizz/compare/v3.6.4...v3.6.5) (2026-06-01)
 
 
