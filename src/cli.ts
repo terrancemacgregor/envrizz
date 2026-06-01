@@ -438,4 +438,177 @@ program
     }
   });
 
+program
+  .command('doctor')
+  .description('Run a health check on your envrizz setup')
+  .action(async () => {
+    const checks: { name: string; status: string; detail: string }[] = [];
+    const recommendations: string[] = [];
+
+    // 1. envrizz.json
+    const configPath = path.join(process.cwd(), 'envrizz.json');
+    let config: Record<string, unknown> = {};
+    if (fs.existsSync(configPath)) {
+      try {
+        config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+        checks.push({ name: 'envrizz.json', status: 'pass', detail: 'Found and valid' });
+      } catch {
+        checks.push({ name: 'envrizz.json', status: 'fail', detail: 'Invalid JSON' });
+        recommendations.push('Fix the JSON syntax in envrizz.json');
+      }
+    } else {
+      checks.push({ name: 'envrizz.json', status: 'fail', detail: 'Not found' });
+      recommendations.push('Run "npx envrizz init" to create the config');
+    }
+
+    // 2. Project name
+    const projectName = config.projectName as string || '';
+    if (projectName) {
+      checks.push({ name: 'Project name', status: 'pass', detail: projectName });
+    } else {
+      checks.push({ name: 'Project name', status: 'warn', detail: 'Not set — will use directory name' });
+      recommendations.push('Set projectName in envrizz.json');
+    }
+
+    // 3. .env files
+    const configManager = new ConfigManager();
+    const fullConfig = configManager.getConfig();
+    const parser = new EnvParser(process.cwd(), fullConfig.exclude);
+    const envFiles = await parser.findEnvFiles();
+    if (envFiles.length > 0) {
+      let totalVars = 0;
+      const fileDetails: string[] = [];
+      for (const ef of envFiles) {
+        const parsed = parser.parseEnvFile(ef);
+        const count = Object.keys(parsed).length;
+        totalVars += count;
+        fileDetails.push(`${ef} (${count})`);
+      }
+      checks.push({ name: '.env files', status: 'pass', detail: `${envFiles.length} files, ${totalVars} variables` });
+    } else {
+      checks.push({ name: '.env files', status: 'warn', detail: 'No .env files found' });
+      recommendations.push('Create .env files or run "npx envrizz pull"');
+    }
+
+    // 4. .env.example
+    const examplePath = path.join(process.cwd(), '.env.example');
+    if (fs.existsSync(examplePath)) {
+      checks.push({ name: '.env.example', status: 'pass', detail: 'Exists' });
+    } else {
+      checks.push({ name: '.env.example', status: 'fail', detail: 'Not found' });
+      recommendations.push('Run "npx envrizz generate-example" to create it');
+    }
+
+    // 5. Comments
+    const comments = (config.comments || {}) as Record<string, string>;
+    const commentKeys = Object.keys(comments);
+    const todos = commentKeys.filter(k => comments[k].startsWith('TODO:'));
+    if (commentKeys.length > 0 && todos.length === 0) {
+      checks.push({ name: 'Comments', status: 'pass', detail: `${commentKeys.length} keys documented` });
+    } else if (todos.length > 0) {
+      checks.push({ name: 'Comments', status: 'warn', detail: `${todos.length} TODOs remaining` });
+      recommendations.push(`Update descriptions for ${todos.join(', ')} in envrizz.json`);
+    } else {
+      checks.push({ name: 'Comments', status: 'warn', detail: 'No comments section' });
+      recommendations.push('Run "npx envrizz generate-example" to populate comments');
+    }
+
+    // 6. .gitignore
+    const gitignorePath = path.join(process.cwd(), '.gitignore');
+    if (fs.existsSync(gitignorePath)) {
+      const gitignore = fs.readFileSync(gitignorePath, 'utf-8');
+      const hasEnv = gitignore.includes('.env');
+      const hasException = gitignore.includes('!.env.example');
+      if (hasEnv && hasException) {
+        checks.push({ name: '.gitignore', status: 'pass', detail: '.env ignored, .env.example allowed' });
+      } else if (hasEnv) {
+        checks.push({ name: '.gitignore', status: 'warn', detail: '.env.example not explicitly allowed' });
+        recommendations.push('Add "!.env.example" to .gitignore');
+      } else {
+        checks.push({ name: '.gitignore', status: 'fail', detail: '.env files are NOT ignored' });
+        recommendations.push('Add .env and .env.* to .gitignore immediately');
+      }
+    } else {
+      checks.push({ name: '.gitignore', status: 'fail', detail: 'No .gitignore found' });
+      recommendations.push('Create a .gitignore and add .env patterns');
+    }
+
+    // 7. Git hooks
+    const hookPath = path.join(process.cwd(), '.git', 'hooks', 'pre-commit');
+    if (fs.existsSync(hookPath)) {
+      const hook = fs.readFileSync(hookPath, 'utf-8');
+      if (hook.includes('envrizz generate-example')) {
+        checks.push({ name: 'Git hooks', status: 'pass', detail: 'pre-commit installed' });
+      } else {
+        checks.push({ name: 'Git hooks', status: 'warn', detail: 'pre-commit exists but missing envrizz' });
+        recommendations.push('Run "npx envrizz init" to add generate-example to pre-commit hook');
+      }
+    } else {
+      checks.push({ name: 'Git hooks', status: 'fail', detail: 'pre-commit not installed' });
+      recommendations.push('Run "npx envrizz init" to install the pre-commit hook');
+    }
+
+    // 8. npm scripts
+    const pkgPath = path.join(process.cwd(), 'package.json');
+    if (fs.existsSync(pkgPath)) {
+      const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+      const scripts = pkg.scripts || {};
+      const hasPush = 'env:push' in scripts;
+      const hasPull = 'env:pull' in scripts;
+      if (hasPush && hasPull) {
+        checks.push({ name: 'npm scripts', status: 'pass', detail: 'env:push and env:pull configured' });
+      } else {
+        const missing = !hasPush && !hasPull ? 'env:push and env:pull' : !hasPush ? 'env:push' : 'env:pull';
+        checks.push({ name: 'npm scripts', status: 'fail', detail: `Missing ${missing}` });
+        recommendations.push('Run "npx envrizz init" to add npm scripts');
+      }
+    }
+
+    // 9. Environment drift
+    if (envFiles.length >= 2) {
+      const fileKeys: Record<string, Set<string>> = {};
+      for (const ef of envFiles) {
+        const parsed = parser.parseEnvFile(ef);
+        fileKeys[ef] = new Set(Object.keys(parsed));
+      }
+      const allKeys = new Set<string>();
+      for (const keys of Object.values(fileKeys)) {
+        for (const k of keys) allKeys.add(k);
+      }
+      const driftKeys = [...allKeys].filter(k => !Object.values(fileKeys).every(s => s.has(k)));
+      if (driftKeys.length > 0) {
+        checks.push({ name: 'Environment drift', status: 'warn', detail: `${driftKeys.length} keys not in all files` });
+        recommendations.push('Run "npx envrizz diff" to see the full breakdown');
+      } else {
+        checks.push({ name: 'Environment drift', status: 'pass', detail: `All ${envFiles.length} files have the same keys` });
+      }
+    }
+
+    // Print results
+    const passCount = checks.filter(c => c.status === 'pass').length;
+    const warnCount = checks.filter(c => c.status === 'warn').length;
+    const failCount = checks.filter(c => c.status === 'fail').length;
+
+    console.log('\nEnvironment Health Check');
+    console.log('\u2500'.repeat(40));
+
+    for (const check of checks) {
+      const icon = check.status === 'pass' ? '\u2714' : check.status === 'warn' ? '\u26A0' : '\u2718';
+      const padding = ' '.repeat(Math.max(0, 22 - check.name.length));
+      console.log(`  ${check.name}${padding}${icon} ${check.detail}`);
+    }
+
+    console.log('');
+    console.log(`  ${passCount} passed, ${warnCount} warnings, ${failCount} failures`);
+
+    if (recommendations.length > 0) {
+      console.log(`\n${recommendations.length} recommendation(s):`);
+      for (const rec of recommendations) {
+        console.log(`  \u2192 ${rec}`);
+      }
+    }
+
+    console.log('');
+  });
+
 program.parse(process.argv);
