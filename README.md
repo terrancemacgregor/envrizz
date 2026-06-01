@@ -297,6 +297,33 @@ PORT=
 URL=
 ```
 
+## Security
+
+### Dependencies
+
+EnvRizz ships with **one production dependency** — [commander](https://github.com/tj/commander.js) for CLI argument parsing. That's it. No transitive dependencies in your supply chain.
+
+| Dependency | Type | Why |
+|-----------|------|-----|
+| `commander` | Production (shipped) | CLI argument parsing, help text, flag handling |
+| `@aws-sdk/client-secrets-manager` | Peer (you install) | AWS Secrets Manager API calls |
+| `@aws-sdk/credential-provider-sso` | Peer (you install) | AWS SSO authentication |
+
+The AWS SDK is a **peer dependency** — it's not bundled with envrizz. You install it yourself, you control the version, and it's maintained by Amazon. We deliberately removed `dotenv` and `glob` to minimize the attack surface.
+
+### What we protect against
+
+- **Path traversal** — the `pull` command validates that all file paths stay within your project directory. A poisoned AWS secret with `../../` in the key name is rejected.
+- **No shell execution** — envrizz never runs shell commands. All file and AWS operations use Node.js APIs directly.
+- **No secrets in git** — `envrizz init` configures `.gitignore` to exclude `.env` files and allows `.env.example`.
+- **npm audit on every push** — the pre-push hook runs `npm audit` before code leaves your machine.
+- **Clean published package** — devDependencies, build scripts, and overrides are stripped from the package.json that ships to npm.
+- **npm provenance** — published packages are signed and tied to specific GitHub Actions builds so you can verify the source.
+
+### Reporting vulnerabilities
+
+If you find a security issue, please email terrance.macgregor@gmail.com instead of opening a public issue.
+
 ## Development
 
 ### Requirements
@@ -307,11 +334,11 @@ URL=
 
 ### Test Suite
 
-78 tests across 4 suites:
+87 tests across 4 suites:
 
 | Suite | Tests | Type |
 |-------|-------|------|
-| EnvParser | 25 | Unit |
+| EnvParser | 34 | Unit |
 | ConfigManager | 13 | Unit |
 | AWSSecretsManager | 15 | Unit (mocked) |
 | CLI | 25 | Integration |
@@ -325,7 +352,7 @@ npm run lint      # Run ESLint
 ### Git Hooks (Husky)
 
 - **Pre-commit:** runs lint
-- **Pre-push:** runs build, tests (78 tests), and `npm audit`
+- **Pre-push:** runs build, tests (87 tests), and `npm audit`
 
 ### Commit Convention
 
