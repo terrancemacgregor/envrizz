@@ -36,8 +36,6 @@ jobs:
           format: 'HTML'
           args: >
             --enableExperimental
-            --nodeAuditAnalyzer
-            --nodePackageAnalyzer
 
       - name: Upload report
         if: always()
