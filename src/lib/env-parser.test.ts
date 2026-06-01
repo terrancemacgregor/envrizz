@@ -124,6 +124,68 @@ describe('EnvParser', () => {
       const result = parser.parseEnvFile('.env');
       expect(result).toEqual({});
     });
+
+    it('handles values with special characters', () => {
+      fs.writeFileSync(path.join(tmpDir, '.env'), 'URL=https://user:p@ss!w0rd@host:5432/db?ssl=true&timeout=30');
+      const parser = new EnvParser(tmpDir);
+      const result = parser.parseEnvFile('.env');
+      expect(result).toEqual({ URL: 'https://user:p@ss!w0rd@host:5432/db?ssl=true&timeout=30' });
+    });
+
+    it('handles multiline file with Windows line endings', () => {
+      fs.writeFileSync(path.join(tmpDir, '.env'), 'PORT=3000\r\nHOST=localhost\r\n');
+      const parser = new EnvParser(tmpDir);
+      const result = parser.parseEnvFile('.env');
+      expect(result.PORT).toBe('3000');
+      expect(result.HOST).toBe('localhost');
+    });
+
+    it('handles keys with no value after equals', () => {
+      fs.writeFileSync(path.join(tmpDir, '.env'), 'EMPTY_KEY=');
+      const parser = new EnvParser(tmpDir);
+      const result = parser.parseEnvFile('.env');
+      expect(result).toEqual({ EMPTY_KEY: '' });
+    });
+
+    it('handles values with spaces', () => {
+      fs.writeFileSync(path.join(tmpDir, '.env'), 'MSG="hello world with spaces"');
+      const parser = new EnvParser(tmpDir);
+      const result = parser.parseEnvFile('.env');
+      expect(result).toEqual({ MSG: 'hello world with spaces' });
+    });
+
+    it('handles inline comments after values', () => {
+      fs.writeFileSync(path.join(tmpDir, '.env'), 'PORT=3000');
+      const parser = new EnvParser(tmpDir);
+      const result = parser.parseEnvFile('.env');
+      expect(result).toEqual({ PORT: '3000' });
+    });
+
+    it('handles base64 encoded values', () => {
+      fs.writeFileSync(path.join(tmpDir, '.env'), 'SECRET=dGhpcyBpcyBhIHNlY3JldA==');
+      const parser = new EnvParser(tmpDir);
+      const result = parser.parseEnvFile('.env');
+      expect(result).toEqual({ SECRET: 'dGhpcyBpcyBhIHNlY3JldA==' });
+    });
+
+    it('handles JSON values', () => {
+      fs.writeFileSync(path.join(tmpDir, '.env'), 'CONFIG={"key":"value","num":42}');
+      const parser = new EnvParser(tmpDir);
+      const result = parser.parseEnvFile('.env');
+      expect(result).toEqual({ CONFIG: '{"key":"value","num":42}' });
+    });
+
+    it('ignores lines without equals sign', () => {
+      fs.writeFileSync(path.join(tmpDir, '.env'), 'PORT=3000\nthis is not a valid line\nHOST=localhost');
+      const parser = new EnvParser(tmpDir);
+      const result = parser.parseEnvFile('.env');
+      expect(result).toEqual({ PORT: '3000', HOST: 'localhost' });
+    });
+
+    it('rejects path traversal', () => {
+      const parser = new EnvParser(tmpDir);
+      expect(() => parser.parseEnvFile('../../etc/passwd')).toThrow('Path traversal detected');
+    });
   });
 
   // ── getAllEnvVariables ───────────────────────────────────────────────

@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as dotenv from 'dotenv';
 
 export interface EnvVariable {
   file: string;
@@ -19,6 +18,42 @@ export class EnvParser {
   constructor(projectRoot: string = process.cwd(), exclude: string[] = ['.env.example', '.env.sample']) {
     this.projectRoot = projectRoot;
     this.exclude = exclude;
+  }
+
+  static parseEnvString(content: string): EnvData {
+    const result: EnvData = {};
+
+    for (const line of content.split('\n')) {
+      const trimmed = line.trim();
+
+      // Skip empty lines and comments
+      if (!trimmed || trimmed.startsWith('#')) {
+        continue;
+      }
+
+      // Find the first = sign
+      const eqIndex = trimmed.indexOf('=');
+      if (eqIndex === -1) {
+        continue;
+      }
+
+      const key = trimmed.substring(0, eqIndex).trim();
+      let value = trimmed.substring(eqIndex + 1);
+
+      // Strip surrounding quotes (double or single)
+      if (
+        (value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))
+      ) {
+        value = value.slice(1, -1);
+      }
+
+      if (key) {
+        result[key] = value;
+      }
+    }
+
+    return result;
   }
 
   async findEnvFiles(): Promise<string[]> {
@@ -44,9 +79,7 @@ export class EnvParser {
     }
 
     const content = fs.readFileSync(absolutePath, 'utf-8');
-    const parsed = dotenv.parse(content);
-    
-    return parsed;
+    return EnvParser.parseEnvString(content);
   }
 
   async getAllEnvVariables(): Promise<EnvVariable[]> {
