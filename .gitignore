@@ -13,3 +13,4 @@ docs/test-reports/
 *.code-workspace
 CLAUDE.md
 .claude/
+test-project/

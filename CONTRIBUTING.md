@@ -33,6 +33,43 @@ This project uses [semantic-release](https://github.com/semantic-release/semanti
 2. Keep PRs focused on a single change
 3. Write a clear description of what your PR does and why
 
+## End-to-End Testing
+
+Unit and integration tests run with `npm test` and don't require AWS. For full end-to-end testing against real AWS Secrets Manager, set up a local test project:
+
+1. Create a `test-project/` directory in the repo root (it's gitignored)
+2. Add a `package.json` and a simple app (e.g., `server.js`) that reads environment variables
+3. Create multiple `.env` files (`.env.dev`, `.env.staging`, `.env.production`) with test values — use fake secrets, never real ones
+4. Make sure you have AWS credentials configured (`aws sso login --profile your-profile`)
+
+Then run through the three test flows:
+
+**Fresh setup:**
+```bash
+cd test-project
+npx envrizz init --project "my-test"
+npx envrizz list
+npx envrizz diff
+npx envrizz generate-example
+```
+
+**Project update (drift detection):**
+```bash
+# Add a new variable to one .env file
+echo "NEW_VAR=test" >> .env.dev
+npx envrizz diff          # Should catch the drift
+npx envrizz generate-example  # Should exclude the non-common key
+```
+
+**Onboarding (push/pull cycle):**
+```bash
+npx envrizz push           # Upload to AWS
+rm .env.dev .env.staging .env.production
+npx envrizz pull           # Should restore all files from AWS
+```
+
+Remember to clean up your AWS Secrets Manager after testing — delete the test secret from the AWS console or CLI.
+
 ## Reporting Bugs
 
 Open an issue at [github.com/terrancemacgregor/envrizz/issues](https://github.com/terrancemacgregor/envrizz/issues) with:
