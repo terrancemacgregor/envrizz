@@ -1,3 +1,10 @@
+## [3.6.2](https://github.com/terrancemacgregor/envrizz/compare/v3.6.1...v3.6.2) (2026-06-01)
+
+
+### Bug Fixes
+
+* remove dotenv dependency, implement own .env parser ([519158f](https://github.com/terrancemacgregor/envrizz/commit/519158f52dff3865fb185c93b6dd31c414f80dc9))
+
 ## [3.6.1](https://github.com/terrancemacgregor/envrizz/compare/v3.6.0...v3.6.1) (2026-06-01)
 
 
