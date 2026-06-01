@@ -1,3 +1,10 @@
+## [3.6.3](https://github.com/terrancemacgregor/envrizz/compare/v3.6.2...v3.6.3) (2026-06-01)
+
+
+### Bug Fixes
+
+* add CodeQL code scanning workflow ([5a04b71](https://github.com/terrancemacgregor/envrizz/commit/5a04b7128dc63c46735cf8f8bad73fe45d826421))
+
 ## [3.6.2](https://github.com/terrancemacgregor/envrizz/compare/v3.6.1...v3.6.2) (2026-06-01)
 
 
