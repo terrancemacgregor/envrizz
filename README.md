@@ -353,6 +353,11 @@ This project uses [semantic-release](https://github.com/semantic-release/semanti
 - TypeScript source: `kebab-case.ts`
 - Tests: `kebab-case.test.ts` (co-located with source)
 
+## Feedback
+
+- **Questions or ideas?** Start a thread in [GitHub Discussions](https://github.com/terrancemacgregor/envrizz/discussions)
+- **Found a bug?** Open an [issue](https://github.com/terrancemacgregor/envrizz/issues)
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
