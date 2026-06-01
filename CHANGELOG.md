@@ -1,3 +1,10 @@
+## [3.6.7](https://github.com/terrancemacgregor/envrizz/compare/v3.6.6...v3.6.7) (2026-06-01)
+
+
+### Bug Fixes
+
+* override brace-expansion to patched version for CVE-2026-33750 ([2f4d330](https://github.com/terrancemacgregor/envrizz/commit/2f4d33028588323733d665abe6542d522ebd8b1d))
+
 ## [3.6.6](https://github.com/terrancemacgregor/envrizz/compare/v3.6.5...v3.6.6) (2026-06-01)
 
 
