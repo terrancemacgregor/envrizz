@@ -1,3 +1,10 @@
+## [3.6.4](https://github.com/terrancemacgregor/envrizz/compare/v3.6.3...v3.6.4) (2026-06-01)
+
+
+### Bug Fixes
+
+* remove custom CodeQL workflow, use GitHub default setup ([bfe9b75](https://github.com/terrancemacgregor/envrizz/commit/bfe9b756e874349a9391f75017d91d04f30427fa))
+
 ## [3.6.3](https://github.com/terrancemacgregor/envrizz/compare/v3.6.2...v3.6.3) (2026-06-01)
 
 
