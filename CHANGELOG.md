@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/terrancemacgregor/envrizz/compare/v4.0.0...v4.0.1) (2026-09-14)
+
+
+### Bug Fixes
+
+* replace em dashes with plain hyphens across code and docs ([f153eb4](https://github.com/terrancemacgregor/envrizz/commit/f153eb4e31b65839e8d77a2c92e1b54048e254e2))
+
 # [4.0.0](https://github.com/terrancemacgregor/envrizz/compare/v3.6.8...v4.0.0) (2026-09-14)
 
 
