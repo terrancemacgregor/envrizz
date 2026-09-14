@@ -9,6 +9,9 @@ dist/
 coverage/
 .vscode/
 .idea/
+.obsidian/
+.project-buttons.json
+state.md
 docs/test-reports/
 *.code-workspace
 CLAUDE.md
