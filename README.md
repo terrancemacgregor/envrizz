@@ -328,7 +328,7 @@ If you find a security issue, please email terrance.macgregor@gmail.com instead 
 
 ### Requirements
 
-- Node.js >= 18.0.0
+- Node.js >= 22.12.0
 - npm
 - TypeScript
 

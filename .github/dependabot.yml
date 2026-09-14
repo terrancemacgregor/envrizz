@@ -24,6 +24,12 @@ updates:
       # support TypeScript 7.
       - dependency-name: "typescript"
         update-types: ["version-update:semver-major"]
+      # @types/node must track the oldest Node release this package supports,
+      # which is the "engines" field in package.json. A newer major would type
+      # APIs that are not there on the oldest supported runtime, so the build
+      # would stop catching a real problem. Raise both together, by hand.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     groups:
       # One PR per group keeps the review load down and lets the lockfile
       # resolve a consistent set of transitive dependencies.
