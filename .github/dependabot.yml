@@ -17,6 +17,13 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+    ignore:
+      # TypeScript 7 cannot be installed yet. Both typescript-eslint (8.70.0)
+      # and ts-jest (29.4.12) declare a peer range that stops below 7, so the
+      # install fails on a peer conflict. Remove this rule when both of them
+      # support TypeScript 7.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
     groups:
       # One PR per group keeps the review load down and lets the lockfile
       # resolve a consistent set of transitive dependencies.
