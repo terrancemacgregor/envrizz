@@ -1,3 +1,16 @@
+# [4.0.0](https://github.com/terrancemacgregor/envrizz/compare/v3.6.8...v4.0.0) (2026-09-14)
+
+
+### Features
+
+* raise the minimum Node version to 22.12 and upgrade commander ([ca0cf2e](https://github.com/terrancemacgregor/envrizz/commit/ca0cf2e2d776cea633ac4d6ad075e73163955d86))
+
+
+### BREAKING CHANGES
+
+* envrizz no longer runs on Node 18 or Node 20. Node
+22.12.0 is now the minimum supported version.
+
 ## [3.6.8](https://github.com/terrancemacgregor/envrizz/compare/v3.6.7...v3.6.8) (2026-06-01)
 
 
