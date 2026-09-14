@@ -6,7 +6,7 @@ Use these consistently across the logo, docs, and CLI output.
 
 | Name | Hex | Usage |
 |------|-----|-------|
-| **Primary** | `#bb3489` | Core brand color — logo, key accents |
+| **Primary** | `#bb3489` | Core brand color - logo, key accents |
 | **Secondary** | `#fb19bc` | Highlights, hover states, emphasis |
 | **White** | `#ffffff` | Backgrounds, contrast text |
 | **Black** | `#000000` | Body text, dark backgrounds |
@@ -38,11 +38,11 @@ EnvRizz sounds like a senior engineer who knows their stuff deeply but doesn't t
 
 ### Principles
 
-1. **Respect the craft** — We take the engineering seriously. The tool is reliable, the code is clean, the docs are accurate. When we talk about how something works, we're precise.
+1. **Respect the craft** - We take the engineering seriously. The tool is reliable, the code is clean, the docs are accurate. When we talk about how something works, we're precise.
 
-2. **Don't respect the ceremony** — We don't write press releases. We don't say "leverage" or "enterprise-grade solution." We say "stop Slacking your .env files to teammates" because that's what's actually happening.
+2. **Don't respect the ceremony** - We don't write press releases. We don't say "leverage" or "enterprise-grade solution." We say "stop Slacking your .env files to teammates" because that's what's actually happening.
 
-3. **Earn the joke** — Humor lands because the tool actually works. The name is funny, but the push/pull is rock solid. The README can be playful because the tests pass.
+3. **Earn the joke** - Humor lands because the tool actually works. The name is funny, but the push/pull is rock solid. The README can be playful because the tests pass.
 
 ### Do
 
@@ -72,4 +72,4 @@ Even errors should sound human, not robotic:
 
 ## Icon Library
 
-**Lucide** (https://lucide.dev) — 1,500+ icons, ISC license, 24px SVGs with 2px strokes. Change colors via the `stroke` attribute.
+**Lucide** (https://lucide.dev) - 1,500+ icons, ISC license, 24px SVGs with 2px strokes. Change colors via the `stroke` attribute.

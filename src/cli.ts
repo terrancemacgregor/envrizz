@@ -107,7 +107,7 @@ program
       for (const [fileName, envData] of fileMap.entries()) {
         const filePath = path.resolve(process.cwd(), fileName);
 
-        // Prevent path traversal — refuse to write outside the project directory
+        // Prevent path traversal - refuse to write outside the project directory
         if (!filePath.startsWith(process.cwd() + path.sep) && filePath !== process.cwd()) {
           console.error(`  - ${fileName}: SKIPPED (path traversal detected)`);
           continue;
@@ -177,7 +177,7 @@ program
           console.log('Added npm scripts: npm run env:push / npm run env:pull');
         }
       } catch {
-        // Non-critical — skip silently if package.json can't be updated
+        // Non-critical - skip silently if package.json can't be updated
       }
     }
 
@@ -472,7 +472,7 @@ program
     if (projectName) {
       checks.push({ name: 'Project name', status: 'pass', detail: projectName });
     } else {
-      checks.push({ name: 'Project name', status: 'warn', detail: 'Not set — will use directory name' });
+      checks.push({ name: 'Project name', status: 'warn', detail: 'Not set - will use directory name' });
       recommendations.push('Set projectName in envrizz.json');
     }
 

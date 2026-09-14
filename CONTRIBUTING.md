@@ -39,7 +39,7 @@ Unit and integration tests run with `npm test` and don't require AWS. For full e
 
 1. Create a `test-project/` directory in the repo root (it's gitignored)
 2. Add a `package.json` and a simple app (e.g., `server.js`) that reads environment variables
-3. Create multiple `.env` files (`.env.dev`, `.env.staging`, `.env.production`) with test values — use fake secrets, never real ones
+3. Create multiple `.env` files (`.env.dev`, `.env.staging`, `.env.production`) with test values - use fake secrets, never real ones
 4. Make sure you have AWS credentials configured (`aws sso login --profile your-profile`)
 
 Then run through the three test flows:
@@ -68,7 +68,7 @@ rm .env.dev .env.staging .env.production
 npx envrizz pull           # Should restore all files from AWS
 ```
 
-Remember to clean up your AWS Secrets Manager after testing — delete the test secret from the AWS console or CLI.
+Remember to clean up your AWS Secrets Manager after testing - delete the test secret from the AWS console or CLI.
 
 ## Reporting Bugs
 

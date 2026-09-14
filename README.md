@@ -28,12 +28,12 @@ New developer joins. They clone the repo, run `npm install`, and immediately hit
 EnvRizz syncs your `.env` files with AWS Secrets Manager so your team has one source of truth. Push your environment variables to AWS with one command, and your teammates pull them down with another. No secrets in Slack DMs, no stale files, no onboarding friction.
 
 - **Environment drift?** Run `envrizz diff` to see exactly which keys are missing from which environments. Run `envrizz generate-example` to create a documented `.env.example` that stays up to date automatically.
-- **Insecure sharing?** Your secrets live in AWS Secrets Manager — encrypted by KMS, scoped by IAM permissions, out of chat history. Push once, everyone pulls.
+- **Insecure sharing?** Your secrets live in AWS Secrets Manager - encrypted by KMS, scoped by IAM permissions, out of chat history. Push once, everyone pulls.
 - **Onboarding?** New developer clones the repo and runs `envrizz pull`. Done. Every variable, every file, ready to go.
 
 ### Works with any project that uses .env files
 
-EnvRizz isn't just for Node.js. If your project uses `.env` files, EnvRizz can manage them — regardless of language or framework:
+EnvRizz isn't just for Node.js. If your project uses `.env` files, EnvRizz can manage them - regardless of language or framework:
 
 **Node.js / Next.js / React** | **Python / Django / Flask** | **Ruby / Rails** | **Go** | **PHP / Laravel** | **Rust** | **Docker Compose**
 
@@ -59,7 +59,7 @@ In production, you shouldn't have `.env` files at all. Once your secrets are in 
 
 The pattern is: **EnvRizz manages the secrets, your infrastructure consumes them.** No `.env` files ever touch a production server.
 
-Tools like [chamber](https://github.com/segmentio/chamber), [aws-vault](https://github.com/99designs/aws-vault), and the AWS SDK can handle the runtime injection side. EnvRizz doesn't try to replace them — it gets your secrets into the right place so those tools can do their job.
+Tools like [chamber](https://github.com/segmentio/chamber), [aws-vault](https://github.com/99designs/aws-vault), and the AWS SDK can handle the runtime injection side. EnvRizz doesn't try to replace them - it gets your secrets into the right place so those tools can do their job.
 
 ## Why EnvRizz?
 
@@ -68,7 +68,7 @@ Tools like [chamber](https://github.com/segmentio/chamber), [aws-vault](https://
 | **Storage** | AWS Secrets Manager (your account) | Dotenv's hosted servers | AWS SSM Parameter Store |
 | **Third-party account** | No | Yes | No |
 | **Your data stays in your AWS** | Yes | No | Yes |
-| **Preserves .env file structure** | Yes — push/pull entire files | No — key/value only | No — key/value only |
+| **Preserves .env file structure** | Yes - push/pull entire files | No - key/value only | No - key/value only |
 | **Setup** | `npx envrizz init` | Sign up + `npx dotenv-vault push` | Install Go binary + KMS key |
 | **Language** | Node.js / npm | Node.js / npm | Go |
 | **Multiple .env files** | Yes (`.env.dev`, `.env.staging`, etc.) | Yes (per environment) | No |
@@ -76,7 +76,7 @@ Tools like [chamber](https://github.com/segmentio/chamber), [aws-vault](https://
 | **Generate .env.example** | Built-in with documented comments | No | No |
 | **Diff across environments** | Built-in | No | No |
 
-**TL;DR** — If your team already uses AWS, EnvRizz is the simplest path. No third-party accounts, no extra infrastructure. Your secrets stay in your AWS account, encrypted by KMS, accessible through the same IAM permissions you already manage.
+**TL;DR** - If your team already uses AWS, EnvRizz is the simplest path. No third-party accounts, no extra infrastructure. Your secrets stay in your AWS account, encrypted by KMS, accessible through the same IAM permissions you already manage.
 
 ## Installation
 
@@ -136,7 +136,7 @@ Shows which keys are common across all your `.env` files, which are missing from
 npx envrizz generate-example
 ```
 
-Creates a `.env.example` with keys common to all your `.env` files. Comments come from `envrizz.json` — see [Configuration](#configuration) below.
+Creates a `.env.example` with keys common to all your `.env` files. Comments come from `envrizz.json` - see [Configuration](#configuration) below.
 
 ## Commands
 
@@ -199,7 +199,7 @@ The `comments` field is the single source of truth for `.env.example` comments. 
 1. Run `envrizz generate-example`
 2. For any key not in `comments`, envrizz adds it with `"TODO: add description for KEY_NAME"` and tells you to update the config
 3. You edit `envrizz.json` and replace the TODOs with real descriptions
-4. Every future run uses your descriptions — no guessing, no merging from source files
+4. Every future run uses your descriptions - no guessing, no merging from source files
 
 The generated `.env.example` looks like this:
 
@@ -226,9 +226,9 @@ The `exclude` list prevents files from being uploaded or scanned. `.env.example`
 
 Running `envrizz init` does three things:
 
-1. **Creates `envrizz.json`** — project config with defaults for region, exclude/include, and comments
-2. **Adds npm scripts** — `env:push` and `env:pull` to your `package.json` so you can run `npm run env:push` instead of remembering the full command
-3. **Installs a git pre-commit hook** — automatically regenerates `.env.example` and stages it before every commit, so it's always up to date in version control
+1. **Creates `envrizz.json`** - project config with defaults for region, exclude/include, and comments
+2. **Adds npm scripts** - `env:push` and `env:pull` to your `package.json` so you can run `npm run env:push` instead of remembering the full command
+3. **Installs a git pre-commit hook** - automatically regenerates `.env.example` and stages it before every commit, so it's always up to date in version control
 
 ## How It Works
 
@@ -301,7 +301,7 @@ URL=
 
 ### Dependencies
 
-EnvRizz ships with **one production dependency** — [commander](https://github.com/tj/commander.js) for CLI argument parsing. That's it. No transitive dependencies in your supply chain.
+EnvRizz ships with **one production dependency** - [commander](https://github.com/tj/commander.js) for CLI argument parsing. That's it. No transitive dependencies in your supply chain.
 
 | Dependency | Type | Why |
 |-----------|------|-----|
@@ -309,16 +309,16 @@ EnvRizz ships with **one production dependency** — [commander](https://github.
 | `@aws-sdk/client-secrets-manager` | Peer (you install) | AWS Secrets Manager API calls |
 | `@aws-sdk/credential-provider-sso` | Peer (you install) | AWS SSO authentication |
 
-The AWS SDK is a **peer dependency** — it's not bundled with envrizz. You install it yourself, you control the version, and it's maintained by Amazon. We deliberately removed `dotenv` and `glob` to minimize the attack surface.
+The AWS SDK is a **peer dependency** - it's not bundled with envrizz. You install it yourself, you control the version, and it's maintained by Amazon. We deliberately removed `dotenv` and `glob` to minimize the attack surface.
 
 ### What we protect against
 
-- **Path traversal** — the `pull` command validates that all file paths stay within your project directory. A poisoned AWS secret with `../../` in the key name is rejected.
-- **No shell execution** — envrizz never runs shell commands. All file and AWS operations use Node.js APIs directly.
-- **No secrets in git** — `envrizz init` configures `.gitignore` to exclude `.env` files and allows `.env.example`.
-- **npm audit on every push** — the pre-push hook runs `npm audit` before code leaves your machine.
-- **Clean published package** — devDependencies, build scripts, and overrides are stripped from the package.json that ships to npm.
-- **npm provenance** — published packages are signed and tied to specific GitHub Actions builds so you can verify the source.
+- **Path traversal** - the `pull` command validates that all file paths stay within your project directory. A poisoned AWS secret with `../../` in the key name is rejected.
+- **No shell execution** - envrizz never runs shell commands. All file and AWS operations use Node.js APIs directly.
+- **No secrets in git** - `envrizz init` configures `.gitignore` to exclude `.env` files and allows `.env.example`.
+- **npm audit on every push** - the pre-push hook runs `npm audit` before code leaves your machine.
+- **Clean published package** - devDependencies, build scripts, and overrides are stripped from the package.json that ships to npm.
+- **npm provenance** - published packages are signed and tied to specific GitHub Actions builds so you can verify the source.
 
 ### Reporting vulnerabilities
 
@@ -334,11 +334,12 @@ If you find a security issue, please email terrance.macgregor@gmail.com instead 
 
 ### Test Suite
 
-87 tests across 4 suites:
+98 tests across 5 suites:
 
 | Suite | Tests | Type |
 |-------|-------|------|
 | EnvParser | 34 | Unit |
+| EnvParser (fuzz) | 11 | Property-based |
 | ConfigManager | 13 | Unit |
 | AWSSecretsManager | 15 | Unit (mocked) |
 | CLI | 25 | Integration |

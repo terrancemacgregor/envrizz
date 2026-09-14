@@ -40,7 +40,7 @@ export class EnvParser {
       const key = trimmed.substring(0, eqIndex).trim();
       let value = trimmed.substring(eqIndex + 1);
 
-      // Strip surrounding quotes (double or single) — must have matching pair
+      // Strip surrounding quotes (double or single) - must have matching pair
       if (
         value.length >= 2 &&
         ((value.startsWith('"') && value.endsWith('"')) ||

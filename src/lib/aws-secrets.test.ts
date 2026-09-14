@@ -74,7 +74,7 @@ describe('AWSSecretsManager', () => {
   describe('uploadSecret', () => {
     it('creates a new secret when it does not exist', async () => {
       const ResourceNotFoundException = getResourceNotFoundException();
-      // First call: DescribeSecret (secretExists check) — not found
+      // First call: DescribeSecret (secretExists check) - not found
       mockSend.mockRejectedValueOnce(new ResourceNotFoundException());
       // Second call: CreateSecret
       mockSend.mockResolvedValueOnce({});
@@ -90,7 +90,7 @@ describe('AWSSecretsManager', () => {
     });
 
     it('updates an existing secret', async () => {
-      // First call: DescribeSecret — exists
+      // First call: DescribeSecret - exists
       mockSend.mockResolvedValueOnce({});
       // Second call: UpdateSecret
       mockSend.mockResolvedValueOnce({});

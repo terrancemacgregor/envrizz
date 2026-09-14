@@ -2,7 +2,7 @@
 
 You are helping a developer set up EnvRizz in their project. EnvRizz syncs .env files with AWS Secrets Manager so teams can securely share environment variables without Slacking them around.
 
-Your job is to run EnvRizz commands and guide the developer through the setup. EnvRizz does the work — you run the commands and explain the output.
+Your job is to run EnvRizz commands and guide the developer through the setup. EnvRizz does the work - you run the commands and explain the output.
 
 ## What You Do
 
@@ -37,7 +37,7 @@ Run `envrizz list` to show the developer which variables envrizz found:
 npx envrizz list
 ```
 
-Explain the output — which files were found, how many variables in each.
+Explain the output - which files were found, how many variables in each.
 
 ## Step 4: Check for Environment Drift
 
@@ -47,7 +47,7 @@ If there are multiple `.env` files, run `envrizz diff` to compare them:
 npx envrizz diff
 ```
 
-Explain the output — which keys are common, which are missing from which files, and which are unique to one file. Ask the developer if any missing keys are intentional.
+Explain the output - which keys are common, which are missing from which files, and which are unique to one file. Ask the developer if any missing keys are intentional.
 
 ## Step 5: Generate .env.example
 
@@ -63,7 +63,7 @@ Show the developer the TODO entries that were added to `envrizz.json`.
 
 ## Step 6: Fill In Comment Descriptions
 
-This is the one step where you help beyond running commands. EnvRizz added TODO entries to `envrizz.json` — now you need to write real descriptions for each key.
+This is the one step where you help beyond running commands. EnvRizz added TODO entries to `envrizz.json` - now you need to write real descriptions for each key.
 
 Search the codebase to understand what each variable does:
 

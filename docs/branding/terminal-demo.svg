@@ -13,7 +13,7 @@
       animation: blink 0.8s step-end infinite;
     }
 
-    /* Staggered line appearances — typing effect */
+    /* Staggered line appearances - typing effect */
     .l1  { animation-delay: 0.3s; }
     .l2  { animation-delay: 0.8s; }
     .l3  { animation-delay: 1.8s; }
