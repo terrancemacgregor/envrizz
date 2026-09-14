@@ -1,0 +1,71 @@
+name: Dependabot auto-merge
+
+# Merges a Dependabot pull request once every other check on it has passed.
+# Major version bumps are left alone so a breaking change always gets a human.
+#
+# The job waits on the checks itself instead of using GitHub's native
+# auto-merge, because native auto-merge only waits when the branch has
+# required status checks, and `main` here must stay writable for the
+# semantic-release job that pushes the version commit.
+
+on:
+  pull_request_target:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    name: Auto-merge Dependabot PR
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Read update metadata
+        id: meta
+        uses: dependabot/fetch-metadata@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Wait for checks, then merge
+        if: steps.meta.outputs.update-type != 'version-update:semver-major'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          SELF: Auto-merge Dependabot PR
+        run: |
+          set -euo pipefail
+
+          # Up to 60 polls, 30 seconds apart, so a slow check has 30 minutes.
+          # `gh pr checks` exits non-zero while checks are pending or failing,
+          # so the exit code is ignored and the states are read instead.
+          for _ in $(seq 1 60); do
+            states=$(gh pr checks "$PR_URL" --json name,state \
+              --jq '.[] | select(.name != env.SELF) | .state') || true
+
+            if grep -qE '^(FAILURE|TIMED_OUT|CANCELLED|ACTION_REQUIRED|STARTUP_FAILURE|ERROR)$' <<<"$states"; then
+              echo "A check failed. Leaving this pull request open for review."
+              exit 1
+            fi
+
+            if grep -qE '^(PENDING|QUEUED|IN_PROGRESS|EXPECTED|WAITING|REQUESTED)$' <<<"$states"; then
+              sleep 30
+              continue
+            fi
+
+            # Never merge on an empty result: that means the checks have not
+            # been reported yet, not that they passed.
+            if ! grep -q '^SUCCESS$' <<<"$states"; then
+              sleep 30
+              continue
+            fi
+
+            echo "All checks passed. Merging."
+            gh pr merge "$PR_URL" --squash --delete-branch
+            exit 0
+          done
+
+          echo "Timed out waiting for checks. Leaving this pull request open."
+          exit 1
