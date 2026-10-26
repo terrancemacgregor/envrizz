@@ -57,15 +57,15 @@
     "@semantic-release/npm": "^13.2.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^22.20.5",
-    "@typescript-eslint/eslint-plugin": "^8.71.2",
-    "@typescript-eslint/parser": "^8.71.2",
-    "eslint": "^10.12.0",
+    "@typescript-eslint/eslint-plugin": "^8.72.0",
+    "@typescript-eslint/parser": "^8.72.0",
+    "eslint": "^10.13.0",
     "fast-check": "^4.10.2",
     "husky": "^9.1.7",
     "jest": "^30.5.2",
     "semantic-release": "^25.0.9",
     "ts-jest": "^29.4.15",
     "typescript": "^5.2.0",
-    "typescript-eslint": "^8.71.2"
+    "typescript-eslint": "^8.72.0"
   }
 }
